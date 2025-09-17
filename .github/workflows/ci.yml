@@ -15,10 +15,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Validate HTML files
-        uses: nu-validator/github-action@v4.0.0
+      - name: Proof HTML
+        uses: igorskyflyer/proof-html@v2
         with:
-          root: ./
+          directory: './'
+          report: true
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4.0.0
         if: github.ref == 'refs/heads/main'
@@ -29,9 +30,9 @@ jobs:
   purge-workflow-runs:
     runs-on: ubuntu-latest
     steps:
-      - name: Delete old workflow runs
-        uses: c-hive/gha-remove-workflow-runs@v1.4.1
+      - name: Delete Workflow Runs
+        uses: Mattraks/delete-workflow-runs@v2
         with:
-          age: '30 days'
-          skip_if_any_in_progress: true
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          retain_days: 30
+          keep_minimum_runs: 6
+          token: ${{ secrets.GITHUB_TOKEN }}
