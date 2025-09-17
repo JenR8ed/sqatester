@@ -1,22 +1,37 @@
 name: HTML Validator and Deploy
+
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 0' # Runs every Sunday at midnight
+
 jobs:
-  build:
+  validate-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Validate HTML files
-        uses: Cyb3r-Jak3/html5validator-action@v7.2.0
+        uses: nu-validator/github-action@v4.0.0
         with:
-          fail_on_error: true
+          root: ./
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+        uses: peaceiris/actions-gh-pages@v4.0.0
         if: github.ref == 'refs/heads/main'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./
+
+  purge-workflow-runs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete old workflow runs
+        uses: c-hive/gha-remove-workflow-runs@v1.4.1
+        with:
+          age: '30 days'
+          skip_if_any_in_progress: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
