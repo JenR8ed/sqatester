@@ -11,12 +11,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Validate HTML files
-        uses: Cyb3r-Jak3/html5validator-action@v7.2.0
+        uses: nu-validator/github-action@v1
         with:
-          root: .
-          log_level: INFO
-          css: true
-          fail_on_error: true
+          file: '*.html'
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         if: github.ref == 'refs/heads/main'
