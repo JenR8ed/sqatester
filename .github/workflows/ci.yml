@@ -1,5 +1,4 @@
 name: HTML Validator and Deploy
-
 on:
   push:
     branches: [main]
@@ -8,7 +7,6 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 0 * * 0' # Runs every Sunday at midnight
-
 jobs:
   validate-and-deploy:
     runs-on: ubuntu-latest
@@ -16,17 +14,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Proof HTML
-        uses: igorskyflyer/proof-html@v2
+        uses: anishathalye/proof-html@v2
         with:
-          directory: './'
-          report: true
+          directory: './'    # Set to the directory containing your HTML files
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4.0.0
         if: github.ref == 'refs/heads/main'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./
-
   purge-workflow-runs:
     runs-on: ubuntu-latest
     steps:
