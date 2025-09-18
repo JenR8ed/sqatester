@@ -13,11 +13,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Proof HTML
-        uses: anishathalye/proof-html@v2
-        continue-on-error: true
-        with:
-          directory: './'    # Set to the directory containing your HTML files
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4.0.0
         if: github.ref == 'refs/heads/main'
