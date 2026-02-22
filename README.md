@@ -1,28 +1,21 @@
 # Jennifer McKinley - Portfolio
 
-Multimodal AI Engineer & SDET Architect portfolio showcasing expertise in AI/ML engineering and software quality assurance.
+Multimodal AI Engineer & SDET Architect
 
-## Features
-
-- **Agentic AI Prototypes**: Showcase of conversational orchestration, late fusion vision pipeline, and production-grade MLOps
-- **Professional Experience**: Detailed SDET and DevOps foundation
-- **Interactive Design**: Tab-based navigation with smooth transitions
-- **Responsive Layout**: Mobile-first design that works on all devices
-
-## Tech Stack
+## 🚀 Tech Stack
 
 - React 18
 - Vite
-- TailwindCSS
-- Lucide React (icons)
+- Tailwind CSS
+- Lucide React Icons
 
-## Development
+## 🛠️ Development
 
 ```bash
 # Install dependencies
 npm install
 
-# Run development server
+# Run dev server
 npm run dev
 
 # Build for production
@@ -32,18 +25,12 @@ npm run build
 npm run preview
 ```
 
-## Deployment
+## 📦 Deployment
 
-This site is configured for GitHub Pages deployment. The build output will be in the `dist` folder.
+This site is automatically deployed to GitHub Pages via GitHub Actions on every push to the `main` branch.
 
-```bash
-npm run build
-```
+**Live Site**: [https://jenr8ed.github.io/sqatester](https://jenr8ed.github.io/sqatester)
 
-Then deploy the `dist` folder to GitHub Pages.
+## 📄 License
 
-## Contact
-
-- Email: jen.mckinley@gmail.com
-- LinkedIn: [linkedin.com/in/sqatester](https://linkedin.com/in/sqatester)
-- GitHub: [github.com/jenr8ed](https://github.com/jenr8ed)
+Copyright © 2026 Jennifer McKinley. All rights reserved.
