@@ -15,8 +15,10 @@ import {
   Zap
 } from 'lucide-react';
 
+
 const App = () => {
   const [activeTab, setActiveTab] = useState('agentic');
+
 
   const profile = {
     name: "Jennifer McKinley",
@@ -29,6 +31,7 @@ const App = () => {
       github: "https://github.com/jenr8ed"
     }
   };
+
 
   const agenticFeatures = [
     {
@@ -50,6 +53,7 @@ const App = () => {
       icon: <Cpu className="w-5 h-5" />
     }
   ];
+
 
   const experience = [
     {
@@ -84,6 +88,7 @@ const App = () => {
     }
   ];
 
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans p-4 md:p-8">
       <div className="max-w-5xl mx-auto space-y-8">
@@ -103,9 +108,10 @@ const App = () => {
           </div>
           <div className="px-4 py-2 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full text-sm font-semibold flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            Open to Contract AI/ML Engineering
+            Open to Contract Al/ML Engineering
           </div>
         </header>
+
 
         {/* TL;DR Summary */}
         <section className="bg-blue-600 text-white rounded-2xl p-8 shadow-lg">
@@ -118,6 +124,7 @@ const App = () => {
             </div>
           </div>
         </section>
+
 
         {/* Tab Navigation */}
         <div className="flex bg-white p-1 rounded-xl border border-slate-200 shadow-sm">
@@ -134,6 +141,7 @@ const App = () => {
             <ShieldCheck className="w-4 h-4" /> SDET & DevOps Foundation
           </button>
         </div>
+
 
         {/* Content Area */}
         <main className="transition-all duration-300">
@@ -199,13 +207,15 @@ const App = () => {
           )}
         </main>
 
+
         {/* Footer */}
         <footer className="text-center py-8 text-slate-400 text-sm border-t border-slate-200">
           <p>© 2026 Jennifer McKinley. Generated via your preferred agentic assistant.</p>
-        </footer>
+        </div>
       </div>
     </div>
   );
 };
+
 
 export default App;
