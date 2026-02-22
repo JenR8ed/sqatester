@@ -108,7 +108,7 @@ const App = () => {
           </div>
           <div className="px-4 py-2 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full text-sm font-semibold flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            Open to Contract Al/ML Engineering
+            Open to Contract AI/ML Engineering
           </div>
         </header>
 
@@ -211,7 +211,7 @@ const App = () => {
         {/* Footer */}
         <footer className="text-center py-8 text-slate-400 text-sm border-t border-slate-200">
           <p>© 2026 Jennifer McKinley. Generated via your preferred agentic assistant.</p>
-        </div>
+        </footer>
       </div>
     </div>
   );
