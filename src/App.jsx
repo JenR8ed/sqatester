@@ -12,13 +12,12 @@ import {
   Database, 
   Workflow, 
   ShieldCheck,
-  Zap
+  Zap,
+  Award
 } from 'lucide-react';
-
 
 const App = () => {
   const [activeTab, setActiveTab] = useState('agentic');
-
 
   const profile = {
     name: "Jennifer McKinley",
@@ -31,7 +30,6 @@ const App = () => {
       github: "https://github.com/jenr8ed"
     }
   };
-
 
   const agenticFeatures = [
     {
@@ -54,12 +52,11 @@ const App = () => {
     }
   ];
 
-
   const experience = [
     {
       company: "AI List Assist (Personal Project)",
       role: "Lead AI Engineer & Architect",
-      period: "Nov 2025 – Present",
+      period: "Nov 2025 - Present",
       bullets: [
         "Built a multimodal inventory intelligence engine using Gemini 1.5 Pro for automated marketplace listing generation.",
         "Developed a Decision Gate logic system to autonomously determine item profitability and listing recommendations.",
@@ -69,7 +66,7 @@ const App = () => {
     {
       company: "Certent Inc.",
       role: "Lead QA Automation Engineer",
-      period: "Sep 2013 – Sep 2016",
+      period: "Sep 2013 - Sep 2016",
       bullets: [
         "Architected scalable Selenium-based automation frameworks using JavaScript, reducing regression cycles by 60%.",
         "Led a horizontal team of 6 engineers, establishing quality-driven roadmaps for enterprise financial SaaS.",
@@ -78,8 +75,8 @@ const App = () => {
     },
     {
       company: "Intel Corp",
-      role: "Tester I – Product Validation",
-      period: "Nov 2021 – Feb 2022",
+      role: "Tester I - Product Validation",
+      period: "Nov 2021 - Feb 2022",
       bullets: [
         "Executed WHQL/HLK hardware validation protocols for graphics drivers with 100% Microsoft compliance.",
         "Automated cross-platform test execution across CPU/GPU/NPU architectures using Python scripts.",
@@ -87,7 +84,6 @@ const App = () => {
       ]
     }
   ];
-
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans p-4 md:p-8">
@@ -112,7 +108,6 @@ const App = () => {
           </div>
         </header>
 
-
         {/* TL;DR Summary */}
         <section className="bg-blue-600 text-white rounded-2xl p-8 shadow-lg">
           <div className="flex items-start gap-4">
@@ -124,7 +119,6 @@ const App = () => {
             </div>
           </div>
         </section>
-
 
         {/* Tab Navigation */}
         <div className="flex bg-white p-1 rounded-xl border border-slate-200 shadow-sm">
@@ -140,8 +134,13 @@ const App = () => {
           >
             <ShieldCheck className="w-4 h-4" /> SDET & DevOps Foundation
           </button>
+          <button 
+            onClick={() => setActiveTab('certifications')}
+            className={`flex-1 py-3 px-4 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2 ${activeTab === 'certifications' ? 'bg-blue-600 text-white shadow-md' : 'text-slate-500 hover:bg-slate-50'}`}
+          >
+            <Award className="w-4 h-4" /> Certifications
+          </button>
         </div>
-
 
         {/* Content Area */}
         <main className="transition-all duration-300">
@@ -182,7 +181,7 @@ const App = () => {
                 </div>
               </div>
             </div>
-          ) : (
+          ) : activeTab === 'experience' ? (
             <div className="space-y-6">
               {experience.map((exp, i) => (
                 <div key={i} className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
@@ -204,18 +203,25 @@ const App = () => {
                 </div>
               ))}
             </div>
+          ) : (
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+              <iframe
+                src="/sqatester/certifications.html"
+                title="Certifications"
+                className="w-full"
+                style={{ height: '80vh', border: 'none' }}
+              />
+            </div>
           )}
         </main>
 
-
         {/* Footer */}
         <footer className="text-center py-8 text-slate-400 text-sm border-t border-slate-200">
-          <p>© 2026 Jennifer McKinley. Generated via your preferred agentic assistant.</p>
+          <p>2026 Jennifer McKinley. Generated via your preferred agentic assistant.</p>
         </footer>
       </div>
     </div>
   );
 };
-
 
 export default App;
