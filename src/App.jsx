@@ -121,20 +121,32 @@ const App = () => {
         </section>
 
         {/* Tab Navigation */}
-        <div className="flex bg-white p-1 rounded-xl border border-slate-200 shadow-sm">
+        <div className="flex bg-white p-1 rounded-xl border border-slate-200 shadow-sm" role="tablist" aria-label="Portfolio Sections">
           <button 
+            role="tab"
+            aria-selected={activeTab === 'agentic'}
+            aria-controls="panel-agentic"
+            id="tab-agentic"
             onClick={() => setActiveTab('agentic')}
             className={`flex-1 py-3 px-4 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2 ${activeTab === 'agentic' ? 'bg-blue-600 text-white shadow-md' : 'text-slate-500 hover:bg-slate-50'}`}
           >
             <Zap className="w-4 h-4" /> Agentic AI Prototypes
           </button>
           <button 
+            role="tab"
+            aria-selected={activeTab === 'experience'}
+            aria-controls="panel-experience"
+            id="tab-experience"
             onClick={() => setActiveTab('experience')}
             className={`flex-1 py-3 px-4 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2 ${activeTab === 'experience' ? 'bg-blue-600 text-white shadow-md' : 'text-slate-500 hover:bg-slate-50'}`}
           >
             <ShieldCheck className="w-4 h-4" /> SDET & DevOps Foundation
           </button>
           <button 
+            role="tab"
+            aria-selected={activeTab === 'certifications'}
+            aria-controls="panel-certifications"
+            id="tab-certifications"
             onClick={() => setActiveTab('certifications')}
             className={`flex-1 py-3 px-4 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2 ${activeTab === 'certifications' ? 'bg-blue-600 text-white shadow-md' : 'text-slate-500 hover:bg-slate-50'}`}
           >
@@ -145,7 +157,7 @@ const App = () => {
         {/* Content Area */}
         <main className="transition-all duration-300">
           {activeTab === 'agentic' ? (
-            <div className="space-y-6">
+            <div className="space-y-6" id="panel-agentic" role="tabpanel" aria-labelledby="tab-agentic">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {agenticFeatures.map((f, i) => (
                   <div key={i} className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:border-blue-300 transition-all group">
@@ -182,7 +194,7 @@ const App = () => {
               </div>
             </div>
           ) : activeTab === 'experience' ? (
-            <div className="space-y-6">
+            <div className="space-y-6" id="panel-experience" role="tabpanel" aria-labelledby="tab-experience">
               {experience.map((exp, i) => (
                 <div key={i} className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
                   <div className="flex flex-col md:flex-row justify-between mb-4 gap-2">
@@ -204,7 +216,7 @@ const App = () => {
               ))}
             </div>
           ) : (
-            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden" id="panel-certifications" role="tabpanel" aria-labelledby="tab-certifications">
               <iframe
                 src="/sqatester/certifications.html"
                 title="Certifications"
