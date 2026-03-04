@@ -88,7 +88,7 @@ const App = () => {
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans p-4 md:p-8 relative overflow-hidden">
       {/* Ambient background glows */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-rose-600/10 rounded-full mix-blend-screen filter blur-[128px] opacity-70 animate-pulse" style={{animationDuration: '4s'}}></div>
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-rose-600/10 rounded-full mix-blend-screen filter blur-[128px] opacity-70 animate-pulse [animation-duration:4s]"></div>
       <div className="absolute bottom-1/4 right-0 w-[600px] h-[600px] bg-red-900/10 rounded-full mix-blend-screen filter blur-[128px] opacity-50"></div>
 
       <div className="max-w-5xl mx-auto space-y-8 relative z-10">
