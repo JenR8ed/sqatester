@@ -16,17 +16,17 @@ import {
   Award
 } from 'lucide-react';
 
-const profile = {
+const profile = Object.freeze({
   name: "Jennifer McKinley",
   title: "Multimodal AI Engineer & SDET Architect",
   summary: "Senior SDET with 10+ years of experience bridging DevOps, QA, and Multimodal AI. Currently architecting AI List Assist, an agentic inventory engine utilizing Gemini 1.5 Pro and Late Fusion architecture to transform unstructured visual data into production-grade e-commerce assets.",
-  contact: {
+  contact: Object.freeze({
     email: "jen.mckinley@gmail.com",
     linkedin: "https://linkedin.com/in/sqatester",
     portfolio: "https://jenr8ed.github.io/sqatester",
     github: "https://github.com/jenr8ed"
-  }
-};
+  })
+});
 
 const agenticFeatures = [
   {
