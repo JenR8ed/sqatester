@@ -16,84 +16,74 @@ import {
   FileText
 } from 'lucide-react';
 
+const profile = Object.freeze({
+  name: "Jennifer McKinley",
+  title: "Multimodal AI Engineer & SDET Architect",
+  summary: "Senior SDET with 10+ years of experience bridging DevOps, QA, and Multimodal AI. Currently architecting AI List Assist, an agentic inventory engine utilizing Gemini 1.5 Pro and Late Fusion architecture to transform unstructured visual data into production-grade e-commerce assets.",
+  contact: Object.freeze({
+    email: "jen.mckinley@gmail.com",
+    linkedin: "https://linkedin.com/in/sqatester",
+    portfolio: "https://jenr8ed.github.io/sqatester",
+    github: "https://github.com/jenr8ed"
+  })
+});
+
+const agenticFeatures = Object.freeze([
+  Object.freeze({
+    title: "Conversational Orchestration",
+    description: "Implemented a state-machine based 'Agent' that identifies missing metadata and autonomously prompts users to resolve ambiguities.",
+    tech: Object.freeze(["Python", "FastAPI", "Gemini 1.5"]),
+    icon: <MessageSquare className="w-5 h-5" />
+  }),
+  Object.freeze({
+    title: "Late Fusion Vision Pipeline",
+    description: "Architected a multi-stage detection system combining Google Cloud Vision OCR with Gemini vision encoders for high-fidelity attribute extraction.",
+    tech: Object.freeze(["Google Cloud Vision", "Multimodal AI"]),
+    icon: <Layers className="w-5 h-5" />
+  }),
+  Object.freeze({
+    title: "Production-Grade MLOps",
+    description: "Deployed inference containers with 99.9% uptime using Docker and automated CI/CD for model deployment and validation.",
+    tech: Object.freeze(["Docker", "Jenkins", "Pytest"]),
+    icon: <Cpu className="w-5 h-5" />
+  })
+]);
+
+const experience = [
+  {
+    company: "AI List Assist (Personal Project)",
+    role: "Lead AI Engineer & Architect",
+    period: "Nov 2025 - Present",
+    bullets: [
+      "Built a multimodal inventory intelligence engine using Gemini 1.5 Pro for automated marketplace listing generation.",
+      "Developed a Decision Gate logic system to autonomously determine item profitability and listing recommendations.",
+      "Integrated eBay Sell APIs (Inventory & Offer) for one-click agentic publishing."
+    ]
+  },
+  {
+    company: "Certent Inc.",
+    role: "Lead QA Automation Engineer",
+    period: "Sep 2013 - Sep 2016",
+    bullets: [
+      "Architected scalable Selenium-based automation frameworks using JavaScript, reducing regression cycles by 60%.",
+      "Led a horizontal team of 6 engineers, establishing quality-driven roadmaps for enterprise financial SaaS.",
+      "Implemented TeamCity CI/CD pipelines for 'test-early' validation of 12+ monthly releases."
+    ]
+  },
+  {
+    company: "Intel Corp",
+    role: "Tester I - Product Validation",
+    period: "Nov 2021 - Feb 2022",
+    bullets: [
+      "Executed WHQL/HLK hardware validation protocols for graphics drivers with 100% Microsoft compliance.",
+      "Automated cross-platform test execution across CPU/GPU/NPU architectures using Python scripts.",
+      "Identified and triaged over 100 critical firmware integration bugs before production release."
+    ]
+  }
+];
+
 const App = () => {
   const [activeTab, setActiveTab] = useState('agentic');
-
-  const profile = {
-    name: "Jennifer McKinley",
-    title: "Multimodal AI Engineer & SDET Architect",
-    summary: "Senior SDET with 10+ years of experience bridging DevOps, QA, and Multimodal AI. Currently architecting AI List Assist, an agentic inventory engine utilizing Gemini 1.5 Pro and Late Fusion architecture to transform unstructured visual data into production-grade e-commerce assets.",
-    contact: {
-      email: "jen.mckinley@gmail.com",
-      linkedin: "https://linkedin.com/in/sqatester",
-      portfolio: "https://jenr8ed.github.io/sqatester",
-      github: "https://github.com/jenr8ed",
-      resume: "https://jenr8ed.github.io/sqatester/resume.pdf"
-    }
-  };
-
-  const agenticFeatures = [
-    {
-      title: "AI List Assist",
-      description: "Architected a multimodal inventory intelligence engine using Gemini 1.5 Pro to transform unstructured photos into SEO-optimized e-commerce assets with 70% faster listing speed.",
-      tech: ["Python", "FastAPI", "Gemini 1.5 Pro"],
-      icon: <Zap className=\"w-6 h-6 text-blue-500\" />,
-      repo: \"https://github.com/jenr8ed/ai-list-assist\"
-    },
-    {
-      title: "Conversational Orchestration",
-      description: "Implemented a state-machine based 'Agent' that identifies missing metadata and autonomously prompts users to resolve ambiguities during the inventory valuation process.",
-      tech: ["Python", "FastAPI", "Agentic Workflows"],
-      icon: <MessageSquare className=\"w-6 h-6 text-blue-500\" />,
-      repo: \"https://github.com/jenr8ed/sqatester\"
-    },
-    {
-      title: "Late Fusion Vision Pipeline",
-      description: "Architected a multi-stage detection system combining Google Cloud Vision OCR with Gemini vision encoders for high-fidelity attribute extraction from vintage collectible images.",
-      tech: ["GCP Vision", "Multimodal AI", "Late Fusion"],
-      icon: <Layers className=\"w-6 h-6 text-blue-500\" />,
-      repo: \"https://github.com/jenr8ed/vision-pipeline\"
-    },
-    {
-      title: "Production-Grade MLOps",
-      description: "Deployed inference containers with 99.9% uptime using Docker and automated CI/CD pipelines, reducing manual deployment overhead by 85%.",
-      tech: ["Docker", "Jenkins", "Pytest"],
-      icon: <Cpu className=\"w-6 h-6 text-blue-500\" />,
-      repo: \"https://github.com/jenr8ed/mlops-infra\"
-    }
-  ];
-
-  const experience = [
-    {
-      company: \"Certent Inc.\",
-      role: \"Lead QA Automation Engineer\",
-      period: \"Sep 2013 - Sep 2016\",
-      bullets: [
-        \"Architected scalable Selenium-based automation frameworks using JavaScript, reducing regression cycles by 60% for enterprise financial SaaS.\",
-        \"Led a horizontal team of 6 engineers, establishing quality-driven roadmaps and mentoring junior SDETs on automation best practices.\",
-        \"Implemented TeamCity CI/CD pipelines for 'test-early' validation of 12+ monthly production releases.\"
-      ]
-    },
-    {
-      company: \"Intel Corp\",
-      role: \"Tester I - Product Validation\",
-      period: \"Nov 2021 - Feb 2022\",
-      bullets: [
-        \"Executed WHQL/HLK hardware validation protocols for graphics drivers with 100% Microsoft compliance.\",
-        \"Automated cross-platform test execution across CPU/GPU/NPU architectures using custom Python scripts.\",
-        \"Identified and triaged over 100 critical firmware integration bugs before production release.\"
-      ]
-    },
-    {
-      company: \"Evolved Force Group\",
-      role: \"QA Test Lead\",
-      period: \"2010 - 2013\",
-      bullets: [
-        \"Managed end-to-end quality assurance processes for multi-platform applications, ensuring zero critical post-release defects.\",
-        \"Designed and executed comprehensive test strategies for complex technical systems and hardware integrations.\"
-      ]
-    }
-  ];
 
   const certifications = [
     {
