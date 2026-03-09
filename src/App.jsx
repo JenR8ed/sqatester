@@ -28,26 +28,26 @@ const profile = Object.freeze({
   })
 });
 
-const agenticFeatures = [
-  {
+const agenticFeatures = Object.freeze([
+  Object.freeze({
     title: "Conversational Orchestration",
     description: "Implemented a state-machine based 'Agent' that identifies missing metadata and autonomously prompts users to resolve ambiguities.",
-    tech: ["Python", "FastAPI", "Gemini 1.5"],
+    tech: Object.freeze(["Python", "FastAPI", "Gemini 1.5"]),
     icon: <MessageSquare className="w-5 h-5" />
-  },
-  {
+  }),
+  Object.freeze({
     title: "Late Fusion Vision Pipeline",
     description: "Architected a multi-stage detection system combining Google Cloud Vision OCR with Gemini vision encoders for high-fidelity attribute extraction.",
-    tech: ["Google Cloud Vision", "Multimodal AI"],
+    tech: Object.freeze(["Google Cloud Vision", "Multimodal AI"]),
     icon: <Layers className="w-5 h-5" />
-  },
-  {
+  }),
+  Object.freeze({
     title: "Production-Grade MLOps",
     description: "Deployed inference containers with 99.9% uptime using Docker and automated CI/CD for model deployment and validation.",
-    tech: ["Docker", "Jenkins", "Pytest"],
+    tech: Object.freeze(["Docker", "Jenkins", "Pytest"]),
     icon: <Cpu className="w-5 h-5" />
-  }
-];
+  })
+]);
 
 const experience = [
   {
