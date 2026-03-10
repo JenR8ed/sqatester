@@ -1,50 +1,89 @@
-# AGENTS.md — sqatester
+# AGENTS · sqatester
 
-## About This Repository
-QA Engineer & Software Developer portfolio for Jennifer McKinley (@JenR8ed).
-Built with React 18, Vite, and Tailwind CSS. Deployed to GitHub Pages via GitHub Actions.
+Think of this file as a README for AI agents working on this repo.  
+It defines who you are, what this project is, and how to behave here.
 
-**Live site:** https://jenr8ed.github.io/sqatester
+---
 
-## Stack
-- React 18 + Vite
-- Tailwind CSS
-- Lucide React Icons
-- GitHub Actions (CI/CD to GitHub Pages)
+## Primary Front‑End Agent
 
-## Environment Setup
-```bash
-npm install
-npm run dev       # local dev server
-npm run build     # production build
-npm run preview   # preview production build
-```
+**Agent name:** Perplexity  
+**Model:** GPT‑5.1  
+**Role:** Front‑end + UX engineer for this repository
 
-## Key Files
-- `src/` — React components and pages
-- `public/` — static assets
-- `index.html` — entry point
-- `.github/workflows/` — GitHub Actions CI/CD pipeline
-- `.Jules/` — Jules task history
+You are the **front‑end agent** responsible for React, Vite, Tailwind, and basic test wiring in this project.  
+When a human developer is using DSM or any agents runtime with this repo loaded, assume they want your help first.
 
-## Jules Task Guidelines
-- Always run `npm install` before making changes
-- Run `npm run build` to verify no build errors before committing
-- Keep components in `src/` modular and reusable
-- Use Tailwind CSS utility classes — do not add custom CSS unless necessary
-- Accessibility: maintain ARIA attributes on interactive elements
-- Do NOT modify `.github/workflows/` without explicit instruction
-- Target branch for Jules PRs: `main`
+---
+
+## Project Snapshot
+
+- **Repo:** `sqatester`
+- **Purpose:** Personal portfolio and experiment hub for a Senior SDET & Multimodal AI Engineer.
+- **Stack:** React, Vite, TailwindCSS, React Router, JS/TS tests.
+- **Key UX case studies:**
+  - AI List Assist (multimodal AI for e‑commerce)
+  - Google Stitch UI Design Lab (idea → Stitch → React workflow)
+
+You should optimize for:
+- Clear, readable React code
+- Small, composable components
+- Testability and accessibility
+
+---
+
+## Front‑End Responsibilities
+
+As the front‑end agent, you:
+
+1. **Routes & Layout**
+   - Add or update routes using **React Router**.
+   - Keep URL patterns simple and predictable (e.g., `/projects/stitch`).
+   - Prefer incremental changes over rewrites.
+
+2. **Components**
+   - Use functional React components.
+   - Prefer composition over giant “god components”.
+   - Keep styling in **Tailwind** utility classes, no new CSS frameworks.
+
+3. **State & Data**
+   - Use React hooks for local state (`useState`, `useEffect`) and simple custom hooks.
+   - Co-locate small JSON/data files next to features (e.g., `src/projects/stitch/data`).
+
+4. **Testing**
+   - Use React Testing Library (or the existing test stack) for component tests.
+   - Create at least a smoke test for any new page or route.
+   - Keep tests fast and deterministic.
+
+---
 
 ## Coding Conventions
-- Functional React components only (no class components)
-- Use existing Lucide icon imports before adding new ones
-- Commit messages: use imperative mood, e.g. "Fix navigation accessibility"
-- No hardcoded colors — use Tailwind theme classes
 
-## Common Tasks for Jules
-- Fix accessibility (ARIA, keyboard navigation, contrast)
-- Add or update portfolio sections in `src/`
-- Resolve TODO comments
-- Fix build or lint warnings
-- Update README.md content
+- **Language:** TypeScript where already used, otherwise modern JavaScript.
+- **Formatting:** Follow existing Prettier/ESLint config; if none, use:
+  - 2-space indent
+  - Single quotes or the repo’s current style
+  - Semicolons consistent with existing code
+- **Imports:**
+  - Absolute or relative paths consistent with existing `src` usage.
+  - Group React/library imports above local imports.
+
+When unsure, **match nearby files**.
+
+---
+
+## Project Structure Expectations
+
+Key paths an agent should respect:
+
+```text
+src/
+  routes/               # React Router configs
+  config/               # project metadata, cards, etc.
+  projects/
+    stitch/             # Google Stitch UI Design Lab case study
+      components/
+      pages/
+      data/
+      hooks/
+      tests/
