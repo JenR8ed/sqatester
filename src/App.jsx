@@ -88,7 +88,7 @@ const App = () => {
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans p-4 md:p-8 relative overflow-hidden">
       {/* Ambient background glows */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-rose-600/10 rounded-full mix-blend-screen filter blur-[128px] opacity-70 animate-pulse [animation-duration:4s]"></div>
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-rose-600/10 rounded-full mix-blend-screen filter blur-[128px] opacity-70 animate-pulse" style={{animationDuration: '4s'}}></div>
       <div className="absolute bottom-1/4 right-0 w-[600px] h-[600px] bg-red-900/10 rounded-full mix-blend-screen filter blur-[128px] opacity-50"></div>
 
       <div className="max-w-5xl mx-auto space-y-8 relative z-10">
@@ -127,30 +127,18 @@ const App = () => {
         {/* Tab Navigation */}
         <div className="flex bg-black/40 backdrop-blur-md p-1 rounded-xl border border-white/5 shadow-inner relative z-10">
           <button 
-            role="tab"
-            aria-selected={activeTab === 'agentic'}
-            aria-controls="panel-agentic"
-            id="tab-agentic"
             onClick={() => setActiveTab('agentic')}
             className={`flex-1 py-3 px-4 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2 ${activeTab === 'agentic' ? 'bg-rose-600 text-white shadow-[0_0_15px_rgba(225,29,72,0.4)]' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
           >
             <Zap className="w-4 h-4" /> Agentic AI Prototypes
           </button>
           <button 
-            role="tab"
-            aria-selected={activeTab === 'experience'}
-            aria-controls="panel-experience"
-            id="tab-experience"
             onClick={() => setActiveTab('experience')}
             className={`flex-1 py-3 px-4 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2 ${activeTab === 'experience' ? 'bg-rose-600 text-white shadow-[0_0_15px_rgba(225,29,72,0.4)]' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
           >
             <ShieldCheck className="w-4 h-4" /> SDET & DevOps Foundation
           </button>
           <button 
-            role="tab"
-            aria-selected={activeTab === 'certifications'}
-            aria-controls="panel-certifications"
-            id="tab-certifications"
             onClick={() => setActiveTab('certifications')}
             className={`flex-1 py-3 px-4 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2 ${activeTab === 'certifications' ? 'bg-rose-600 text-white shadow-[0_0_15px_rgba(225,29,72,0.4)]' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
           >
@@ -161,7 +149,7 @@ const App = () => {
         {/* Content Area */}
         <main className="transition-all duration-300">
           {activeTab === 'agentic' ? (
-            <div className="space-y-6" id="panel-agentic" role="tabpanel" aria-labelledby="tab-agentic">
+            <div className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {agenticFeatures.map((f, i) => (
                   <div key={i} className="bg-zinc-900/40 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-lg hover:border-rose-500/50 hover:bg-white/5 transition-all duration-300 group">
@@ -198,7 +186,7 @@ const App = () => {
               </div>
             </div>
           ) : activeTab === 'experience' ? (
-            <div className="space-y-6" id="panel-experience" role="tabpanel" aria-labelledby="tab-experience">
+            <div className="space-y-6">
               {experience.map((exp, i) => (
                 <div key={i} className="bg-zinc-900/40 backdrop-blur-md rounded-2xl border border-white/10 p-8 shadow-lg hover:bg-white/5 hover:border-rose-500/30 transition-all duration-300">
                   <div className="flex flex-col md:flex-row justify-between mb-4 gap-2">
