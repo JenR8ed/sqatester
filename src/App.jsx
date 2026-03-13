@@ -1,20 +1,4 @@
-import React, { useState } from 'react';
-import { 
-  Terminal, 
-  Cpu, 
-  Layers, 
-  CheckCircle, 
-  MessageSquare, 
-  Github, 
-  Linkedin, 
-  Mail, 
-  Workflow, 
-  ShieldCheck, 
-  Zap, 
-  Award,
-  Download,
-  FileText
-} from 'lucide-react';
+import React, { useState, useEffect } from 'react';
 
 const profile = Object.freeze({
   name: "Jennifer McKinley",
@@ -32,232 +16,323 @@ const agenticFeatures = Object.freeze([
   Object.freeze({
     title: "Conversational Orchestration",
     description: "Implemented a state-machine based 'Agent' that identifies missing metadata and autonomously prompts users to resolve ambiguities.",
-    tech: Object.freeze(["Python", "FastAPI", "Gemini 1.5"]),
-    icon: <MessageSquare className="w-5 h-5" />
+    tech: Object.freeze(["Python", "FastAPI", "Gemini 1.5"])
   }),
   Object.freeze({
     title: "Late Fusion Vision Pipeline",
     description: "Architected a multi-stage detection system combining Google Cloud Vision OCR with Gemini vision encoders for high-fidelity attribute extraction.",
-    tech: Object.freeze(["Google Cloud Vision", "Multimodal AI"]),
-    icon: <Layers className="w-5 h-5" />
+    tech: Object.freeze(["Google Cloud Vision", "Multimodal AI"])
   }),
   Object.freeze({
     title: "Production-Grade MLOps",
     description: "Deployed inference containers with 99.9% uptime using Docker and automated CI/CD for model deployment and validation.",
-    tech: Object.freeze(["Docker", "Jenkins", "Pytest"]),
-    icon: <Cpu className="w-5 h-5" />
+    tech: Object.freeze(["Docker", "Jenkins", "Pytest"])
   })
 ]);
 
-const experience = [
-  {
+const experience = Object.freeze([
+  Object.freeze({
     company: "AI List Assist (Personal Project)",
     role: "Lead AI Engineer & Architect",
     period: "Nov 2025 - Present",
-    bullets: [
+    bullets: Object.freeze([
       "Built a multimodal inventory intelligence engine using Gemini 1.5 Pro for automated marketplace listing generation.",
       "Developed a Decision Gate logic system to autonomously determine item profitability and listing recommendations.",
       "Integrated eBay Sell APIs (Inventory & Offer) for one-click agentic publishing."
-    ]
-  },
-  {
+    ])
+  }),
+  Object.freeze({
     company: "Certent Inc.",
     role: "Lead QA Automation Engineer",
     period: "Sep 2013 - Sep 2016",
-    bullets: [
+    bullets: Object.freeze([
       "Architected scalable Selenium-based automation frameworks using JavaScript, reducing regression cycles by 60%.",
       "Led a horizontal team of 6 engineers, establishing quality-driven roadmaps for enterprise financial SaaS.",
       "Implemented TeamCity CI/CD pipelines for 'test-early' validation of 12+ monthly releases."
-    ]
-  },
-  {
+    ])
+  }),
+  Object.freeze({
     company: "Intel Corp",
     role: "Tester I - Product Validation",
     period: "Nov 2021 - Feb 2022",
-    bullets: [
+    bullets: Object.freeze([
       "Executed WHQL/HLK hardware validation protocols for graphics drivers with 100% Microsoft compliance.",
       "Automated cross-platform test execution across CPU/GPU/NPU architectures using Python scripts.",
       "Identified and triaged over 100 critical firmware integration bugs before production release."
-    ]
-  }
-];
+    ])
+  })
+]);
+
+const certifications = Object.freeze([
+  Object.freeze({
+    name: "Google IT Automation with Python Professional Certificate",
+    issuer: "Google / Coursera"
+  }),
+  Object.freeze({
+    name: "Programming in HTML5 with JavaScript and CSS3",
+    issuer: "Microsoft Certified Professional"
+  })
+]);
 
 const App = () => {
-  const [activeTab, setActiveTab] = useState('agentic');
+  const [timeString, setTimeString] = useState('');
 
-  const certifications = [
-    {
-      name: \"Google IT Automation with Python Professional Certificate\",
-      issuer: \"Google / Coursera\",
-      icon: <CheckCircle className=\"w-5 h-5 text-green-500\" />
-    },
-    {
-      name: \"Programming in HTML5 with JavaScript and CSS3\",
-      issuer: \"Microsoft Certified Professional\",
-      icon: <CheckCircle className=\"w-5 h-5 text-green-500\" />
-    }
-  ];
+  useEffect(() => {
+    const updateClock = () => {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      setTimeString(`${hours}:${minutes}:${seconds}`);
+    };
+    const intervalId = setInterval(updateClock, 1000);
+    updateClock();
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
-    <div className=\"min-h-screen bg-slate-50 text-slate-900 font-sans p-4 md:p-8\">
-      <div className=\"max-w-4xl mx-auto space-y-8\">
-        
-        {/* Header Section */}
-        <header className=\"bg-white rounded-2xl shadow-sm border border-slate-100 p-6 md:p-10\">
-          <div className=\"flex flex-col md:flex-row justify-between items-start md:items-center gap-6\">
-            <div>
-              <h1 className=\"text-3xl md:text-4xl font-extrabold tracking-tight\">{profile.name}</h1>
-              <div className=\"flex items-center gap-2 mt-2 text-blue-600 font-medium\">
-                <Cpu size={20} />
-                <span>{profile.title}</span>
+    <div className="bg-background-dark font-mono text-primary min-h-screen relative overflow-x-hidden crt-flicker-layer dark">
+      <div className="fixed inset-0 crt-overlay"></div>
+      <div className="fixed inset-0 scanline-effect"></div>
+      <div className="moving-scanline"></div>
+
+      <div className="relative flex h-auto min-h-screen w-full flex-col bg-terminal-black group/design-root overflow-x-hidden">
+        <div className="layout-container flex h-full grow flex-col">
+
+          <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/20 px-6 py-4 md:px-10 lg:px-40 bg-terminal-black/80 backdrop-blur-md sticky top-0 z-50">
+            <div className="flex items-center gap-4 text-primary">
+              <div className="size-6 terminal-text-glow">
+                <span className="material-symbols-outlined text-3xl">terminal</span>
               </div>
-              <div className=\"flex flex-wrap gap-4 mt-4 text-slate-500\">
-                <a href={profile.contact.linkedin} className=\"flex items-center gap-1 hover:text-blue-600 transition-colors\">
-                  <Linkedin size={18} /> LinkedIn
-                </a>
-                <a href={profile.contact.github} className=\"flex items-center gap-1 hover:text-blue-600 transition-colors\">
-                  <Github size={18} /> GitHub
-                </a>
-                <a href={`mailto:${profile.contact.email}`} className=\"flex items-center gap-1 hover:text-blue-600 transition-colors\">
-                  <Mail size={18} /> Email
-                </a>
+              <h2 className="text-primary text-lg font-bold leading-tight tracking-tight font-display uppercase italic">JenR8ed_Terminal</h2>
+            </div>
+            <div className="hidden lg:flex items-center gap-4 font-mono text-[10px] xl:text-xs">
+              <div className="flex items-center gap-1">
+                <span className="text-primary/40">[</span>
+                <span className="text-primary terminal-text-glow uppercase tracking-wider">Uptime: UP 10y 02d 14h</span>
+                <span className="text-primary/40">]</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="text-primary/40">[</span>
+                <span className="text-primary terminal-text-glow font-bold clock-update" id="live-clock">{timeString}</span>
+                <span className="text-primary/40">]</span>
               </div>
             </div>
-            <div className=\"flex flex-col gap-3 w-full md:w-auto\">
-              <a 
-                href={profile.contact.resume}
-                className=\"bg-slate-900 text-white px-6 py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-slate-800 transition-all shadow-lg shadow-slate-200\"
-              >
-                <Download size={18} /> Download Resume
-              </a>
-              <div className=\"bg-emerald-50 text-emerald-700 px-4 py-2 rounded-full text-xs font-bold border border-emerald-100 flex items-center justify-center gap-2\">
-                <div className=\"w-2 h-2 bg-emerald-500 rounded-full animate-pulse\"></div>
-                Open to Contract AI/ML Engineering
-              </div>
+            <div className="flex flex-1 justify-end gap-8">
+              <nav className="hidden md:flex items-center gap-9">
+                <a className="text-primary/70 hover:text-primary text-sm font-medium leading-normal transition-colors" href="#whoami">whoami</a>
+                <a className="text-primary/70 hover:text-primary text-sm font-medium leading-normal transition-colors" href="#man">man</a>
+                <a className="text-primary/70 hover:text-primary text-sm font-medium leading-normal transition-colors" href="#projects">projects</a>
+                <a className="text-primary/70 hover:text-primary text-sm font-medium leading-normal transition-colors" href="#experience">experience</a>
+                <a className="text-primary/70 hover:text-primary text-sm font-medium leading-normal transition-colors" href="#certifications">certifications</a>
+                <a className="text-primary/70 hover:text-primary text-sm font-medium leading-normal transition-colors" href="#contact">contact</a>
+              </nav>
+              <button className="flex min-w-[100px] cursor-pointer items-center justify-center overflow-hidden rounded bg-primary text-background-dark text-xs font-black uppercase leading-normal tracking-widest px-4 h-9 hover:bg-white transition-all">
+                <span>EXECUTE</span>
+              </button>
             </div>
-          </div>
-        </header>
+          </header>
 
-        {/* TL;DR Summary */}
-        <section className=\"bg-blue-600 rounded-2xl p-8 text-white shadow-xl shadow-blue-100\">
-          <div className=\"flex items-start gap-4\">
-            <Layers className=\"w-10 h-10 mt-1 opacity-80\" />
-            <p className=\"text-lg md:text-xl leading-relaxed font-medium\">
-              {profile.summary}
-            </p>
-          </div>
-        </section>
+          <main className="px-6 md:px-10 lg:px-40 py-10 flex flex-col gap-12 max-w-[1200px] mx-auto w-full">
+            <div className="clear-wipe-effect flex flex-col gap-12">
 
-        {/* Tab Navigation */}
-        <nav className=\"bg-white p-2 rounded-2xl shadow-sm border border-slate-100 flex gap-1\">
-          <button 
-            onClick={() => setActiveTab('agentic')}
-            className={`flex-1 py-3 px-4 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2 ${activeTab === 'agentic' ? 'bg-blue-600 text-white shadow-md' : 'text-slate-500 hover:bg-slate-50'}`}
-          >
-            <Zap size={18} /> Agentic AI Prototypes
-          </button>
-          <button 
-            onClick={() => setActiveTab('experience')}
-            className={`flex-1 py-3 px-4 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2 ${activeTab === 'experience' ? 'bg-blue-600 text-white shadow-md' : 'text-slate-500 hover:bg-slate-50'}`}
-          >
-            <ShieldCheck size={18} /> SDET & DevOps Foundation
-          </button>
-          <button 
-            onClick={() => setActiveTab('certifications')}
-            className={`flex-1 py-3 px-4 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2 ${activeTab === 'certifications' ? 'bg-blue-600 text-white shadow-md' : 'text-slate-500 hover:bg-slate-50'}`}
-          >
-            <Award size={18} /> Certifications
-          </button>
-        </nav>
-
-        {/* Content Area */}
-        <main className=\"animate-in fade-in duration-500\">
-          {activeTab === 'agentic' ? (
-            <div className=\"space-y-6\">
-              <div className=\"grid md:grid-cols-2 gap-6\">
-                {agenticFeatures.map((f, i) => (
-                  <div key={i} className=\"bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow group\">
-                    <div className=\"bg-slate-50 w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-50 transition-colors\">
-                      {f.icon}
-                    </div>
-                    <div className=\"flex justify-between items-start\">
-                      <h3 className=\"text-xl font-bold\">{f.title}</h3>
-                      <a href={f.repo} className=\"text-slate-400 hover:text-blue-600\">
-                        <ExternalLink size={18} />
-                      </a>
-                    </div>
-                    <p className=\"text-slate-600 mt-2 mb-4 leading-relaxed\">{f.description}</p>
-                    <div className=\"flex flex-wrap gap-2\">
-                      {f.tech.map(t => (
-                        <span key={t} className=\"text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-500 px-2 py-1 rounded\">
-                          {t}
-                        </span>
-                      ))}
+              <section className="flex flex-col gap-6" id="whoami">
+                <div className="flex items-center gap-2">
+                  <span className="text-primary/50">visitor@jenr8ed:~$</span>
+                  <h1 className="text-primary text-2xl md:text-3xl font-bold terminal-text-glow">whoami</h1>
+                </div>
+                <div className="bg-primary/5 border border-primary/20 p-6 md:p-10 rounded-lg relative overflow-hidden">
+                  <div className="absolute top-0 right-0 p-4 opacity-10">
+                    <span className="material-symbols-outlined text-9xl">person_search</span>
+                  </div>
+                  <div className="relative z-10 flex flex-col gap-4">
+                    <h2 className="text-primary text-3xl md:text-5xl font-black leading-tight font-display">{profile.name}</h2>
+                    <p className="text-primary/90 text-lg md:text-xl max-w-2xl leading-relaxed">
+                      {profile.title}. {profile.summary}
+                    </p>
+                    <div className="mt-4 flex gap-4">
+                      <a href="#contact" className="bg-primary text-background-dark px-6 py-3 rounded font-bold uppercase text-sm tracking-widest hover:brightness-110">INITIALIZE_CONTACT</a>
+                      <a href={profile.contact.portfolio} className="border border-primary text-primary px-6 py-3 rounded font-bold uppercase text-sm tracking-widest hover:bg-primary/10 text-center">GET_RESUME.EXE</a>
                     </div>
                   </div>
-                ))}
-              </div>
-              
-              <div className=\"bg-slate-900 rounded-2xl p-6 text-emerald-400 font-mono text-sm overflow-hidden border border-slate-800 shadow-2xl\">
-                <div className=\"flex items-center gap-2 mb-4 border-b border-slate-800 pb-2 text-slate-500\">
-                  <Terminal size={16} />
-                  <span>Live Agent Log: ConversationOrchestrator</span>
                 </div>
-                <div className=\"space-y-1\">
-                  <p className=\"text-slate-500\">[{new Date().toISOString()}] INFO: Initializing ItemValuation agent...</p>
-                  <p><span className=\"text-emerald-500\">DETECTED:</span> Sony WH-1000XM4 (Confidence: 0.94)</p>
-                  <p><span className=\"text-blue-400\">ANALYZING:</span> 90-day sold pricing data found.</p>
-                  <p className=\"text-amber-400 animate-pulse\">AGENTIC QUERY: \"Is original packaging included?\"</p>
-                  <p className=\"text-slate-500\">WAITING: User input required to finalize ListingDraft...</p>
+              </section>
+
+              <section className="flex flex-col gap-4" id="man">
+                <div className="flex items-center gap-2">
+                  <span className="text-primary/50">visitor@jenr8ed:~$</span>
+                  <h2 className="text-primary text-xl font-bold terminal-text-glow">man jennifer</h2>
                 </div>
-              </div>
-            </div>
-          ) : activeTab === 'experience' ? (
-            <div className=\"space-y-6\">
-              {experience.map((exp, i) => (
-                <div key={i} className=\"bg-white p-8 rounded-2xl border border-slate-100 shadow-sm\">
-                  <div className=\"flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-2\">
+                <div className="bg-primary/5 border border-primary/20 p-6 md:p-8 rounded font-mono text-xs md:text-sm leading-relaxed overflow-x-auto relative">
+                  <div className="flex justify-between mb-8 text-primary font-bold uppercase tracking-widest opacity-80">
+                    <span>JENNIFER(1)</span>
+                    <span>Manual Programmer's Manual</span>
+                    <span>JENNIFER(1)</span>
+                  </div>
+                  <div className="flex flex-col gap-6">
                     <div>
-                      <h3 className=\"text-2xl font-bold\">{exp.role}</h3>
-                      <p className=\"text-blue-600 font-bold text-lg\">{exp.company}</p>
+                      <h3 className="text-primary font-black mb-2 terminal-text-glow">NAME</h3>
+                      <p className="pl-8 text-primary/90">{profile.name} - {profile.title}</p>
                     </div>
-                    <span className=\"bg-slate-100 text-slate-600 px-4 py-1 rounded-full text-sm font-bold\">
-                      {exp.period}
-                    </span>
+                    <div>
+                      <h3 className="text-primary font-black mb-2 terminal-text-glow">SYNOPSIS</h3>
+                      <p className="pl-8 text-primary/90 font-bold">jennifer <span className="font-normal">[--ai] [--python] [--sdet] [--qa]</span></p>
+                    </div>
+                    <div>
+                      <h3 className="text-primary font-black mb-2 terminal-text-glow">DESCRIPTION</h3>
+                      <p className="pl-8 text-primary/90 text-justify">
+                        {profile.summary}
+                      </p>
+                    </div>
+                    <div>
+                      <h3 className="text-primary font-black mb-2 terminal-text-glow">OPTIONS</h3>
+                      <div className="pl-8 flex flex-col gap-2">
+                        <div className="flex gap-4">
+                          <span className="text-primary font-bold min-w-[100px]">--github</span>
+                          <a href={profile.contact.github} className="text-primary/90 hover:underline">{profile.contact.github}</a>
+                        </div>
+                        <div className="flex gap-4">
+                          <span className="text-primary font-bold min-w-[100px]">--linkedin</span>
+                          <a href={profile.contact.linkedin} className="text-primary/90 hover:underline">{profile.contact.linkedin}</a>
+                        </div>
+                        <div className="flex gap-4">
+                          <span className="text-primary font-bold min-w-[100px]">--email</span>
+                          <a href={`mailto:${profile.contact.email}`} className="text-primary/90 hover:underline">{profile.contact.email}</a>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <ul className=\"space-y-4\">
-                    {exp.bullets.map((b, j) => (
-                      <li key={j} className=\"flex items-start gap-3 text-slate-600 leading-relaxed\">
-                        <div className=\"w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 shrink-0\"></div>
-                        <span>{b}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="mt-12 text-center text-primary/40 text-[10px]">
+                    JenR8ed OS 1.2.0 - 2026
+                  </div>
                 </div>
-              ))}
-            </div>
-          ) : (
-            <div className=\"bg-white p-8 rounded-2xl border border-slate-100 shadow-sm grid md:grid-cols-2 gap-6\">
-              {certifications.map((cert, i) => (
-                <div key={i} className=\"flex items-center gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100\">
-                  <div className=\"bg-white p-3 rounded-lg shadow-sm\">
-                    {cert.icon}
-                  </div>
-                  <div>
-                    <p className=\"font-bold leading-tight\">{cert.name}</p>
-                    <p className=\"text-slate-500 text-sm mt-1 font-medium\">{cert.issuer}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </main>
+              </section>
 
-        <footer className=\"text-center py-10 border-t border-slate-200\">
-          <p className=\"text-slate-400 text-sm font-medium\">
-            © 2026 Jennifer McKinley. Based in Oakland, CA.
-          </p>
-        </footer>
+              <section className="flex flex-col gap-4" id="projects">
+                <div className="flex items-center gap-2">
+                  <span className="text-primary/50">visitor@jenr8ed:~$</span>
+                  <h2 className="text-primary text-xl font-bold terminal-text-glow">ls -la ./agentic_features</h2>
+                </div>
+                <div className="bg-primary/5 border border-primary/20 p-6 rounded font-mono text-sm md:text-base leading-relaxed overflow-x-auto">
+                  <div className="flex flex-col gap-6">
+                    {agenticFeatures.map((f, i) => (
+                      <div key={i} className="flex flex-col gap-2 border-l-2 border-primary/20 pl-4">
+                        <div className="flex items-center gap-2">
+                          <span className="text-primary font-bold text-lg">{f.title}</span>
+                        </div>
+                        <p className="text-primary/80 text-sm leading-relaxed">{f.description}</p>
+                        <div className="flex gap-2 text-[10px] mt-1">
+                           <span className="text-primary/50">Tech:</span>
+                           {f.tech.map(t => (
+                              <span key={t} className="text-background-dark bg-primary/80 px-1 font-bold">{t}</span>
+                           ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+
+              <section className="flex flex-col gap-4" id="experience">
+                <div className="flex items-center gap-2">
+                  <span className="text-primary/50">visitor@jenr8ed:~$</span>
+                  <h2 className="text-primary text-xl font-bold terminal-text-glow">cat experience.log</h2>
+                </div>
+                <div className="bg-primary/5 border border-primary/20 p-6 rounded font-mono text-sm md:text-base leading-relaxed overflow-x-auto">
+                   <div className="flex flex-col gap-8">
+                    {experience.map((exp, i) => (
+                      <div key={i} className="flex flex-col gap-2">
+                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-1 mb-2 border-b border-primary/20 pb-2">
+                          <span className="text-primary font-bold text-lg terminal-text-glow">{exp.company} // {exp.role}</span>
+                          <span className="text-primary/60 text-xs">[{exp.period}]</span>
+                        </div>
+                        <ul className="flex flex-col gap-2">
+                          {exp.bullets.map((b, j) => (
+                            <li key={j} className="flex items-start gap-2 text-primary/80 text-sm">
+                              <span className="text-primary mt-1">&gt;</span>
+                              <span>{b}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+
+              <section className="flex flex-col gap-4" id="certifications">
+                <div className="flex items-center gap-2">
+                  <span className="text-primary/50">visitor@jenr8ed:~$</span>
+                  <h2 className="text-primary text-xl font-bold terminal-text-glow">df -h ./certifications</h2>
+                </div>
+                <div className="bg-primary/5 border border-primary/20 p-6 rounded font-mono text-[10px] md:text-sm overflow-x-auto">
+                  <table className="w-full text-left border-collapse min-w-[600px]">
+                    <thead>
+                      <tr className="text-primary font-bold border-b border-primary/20">
+                        <th className="py-2 pr-4">Certification</th>
+                        <th className="py-2 px-4">Issuer</th>
+                        <th className="py-2 px-4">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-primary/80">
+                      {certifications.map((cert, i) => (
+                        <tr key={i} className="hover:bg-primary/5 transition-colors border-b border-primary/10">
+                          <td className="py-3 pr-4 font-bold">{cert.name}</td>
+                          <td className="py-3 px-4">{cert.issuer}</td>
+                          <td className="py-3 px-4 text-primary">VALIDATED</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <section className="flex flex-col gap-4" id="contact">
+                <div className="flex items-center gap-2">
+                  <span className="text-primary/50">visitor@jenr8ed:~$</span>
+                  <h2 className="text-primary text-xl font-bold terminal-text-glow">ssh jennifer@contact.me</h2>
+                </div>
+                <div className="flex flex-col gap-6 mt-4 border-l-2 border-primary/20 pl-6">
+                  <div className="flex flex-col gap-2">
+                    <p className="text-primary/90">The authenticity of host contact.me can't be established.</p>
+                    <p className="text-primary/90">ECDSA key fingerprint is SHA256:7u8v9w0x1y2z3a4b5c6d7e8f9g0h1i2j3k4l5m6n7o8.</p>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <label className="whitespace-nowrap">Are you sure you want to continue connecting (yes/no)? [yes]</label>
+                      <input autoFocus className="terminal-input w-24 border-b border-primary/30 bg-transparent text-primary outline-none ring-0" placeholder="yes" type="text" />
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-4">
+                    <p className="text-primary/70 italic text-sm">Warning: Permanently added 'contact.me' (ECDSA) to the list of known hosts.</p>
+                    <div className="flex flex-col gap-2">
+                      <label className="text-primary font-bold" htmlFor="message-field">Message:</label>
+                      <textarea className="bg-primary/5 border border-primary/20 rounded p-4 text-primary font-mono focus:ring-1 focus:ring-primary focus:border-primary outline-none resize-none w-full max-w-2xl" id="message-field" placeholder="Type your inquiry here..." rows="4"></textarea>
+                    </div>
+                    <div>
+                      <a href={`mailto:${profile.contact.email}`} className="inline-block bg-primary text-background-dark px-6 py-2 rounded font-bold uppercase text-xs tracking-widest hover:bg-white transition-all">SUBMIT_PAYLOAD</a>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+            </div>
+            <div className="flex items-center gap-2 pt-10 pb-20 border-t border-primary/10">
+              <span className="text-primary/50">visitor@jenr8ed:~$</span>
+              <span className="cursor animate-blink"></span>
+            </div>
+          </main>
+
+          <footer className="fixed bottom-0 left-0 w-full bg-primary/10 backdrop-blur-sm border-t border-primary/20 px-4 py-1 flex justify-between text-[10px] text-primary/60 font-mono z-40">
+            <div className="flex gap-4">
+              <span>UTF-8</span>
+              <span>PYTHON 3.11</span>
+            </div>
+            <div className="flex gap-4">
+              <span>JENR8ED_OS v1.2.0</span>
+              <span>STATUS: ENCRYPTED_ACCESS</span>
+            </div>
+          </footer>
+
+        </div>
       </div>
     </div>
   );
