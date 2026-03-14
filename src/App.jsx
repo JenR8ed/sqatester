@@ -91,226 +91,124 @@ const App = () => {
   }, []);
 
   return (
-    <div className="bg-background-dark font-mono text-primary min-h-screen relative overflow-x-hidden crt-flicker-layer dark">
-      <div className="fixed inset-0 crt-overlay"></div>
-      <div className="fixed inset-0 scanline-effect"></div>
-      <div className="moving-scanline"></div>
+    <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans p-4 md:p-8 relative overflow-hidden">
+      {/* Ambient background glows */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-rose-600/10 rounded-full mix-blend-screen filter blur-[128px] opacity-70 animate-pulse" style={{animationDuration: '4s'}}></div>
+      <div className="absolute bottom-1/4 right-0 w-[600px] h-[600px] bg-red-900/10 rounded-full mix-blend-screen filter blur-[128px] opacity-50"></div>
 
-      <div className="relative flex h-auto min-h-screen w-full flex-col bg-terminal-black group/design-root overflow-x-hidden">
-        <div className="layout-container flex h-full grow flex-col">
-
-          <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/20 px-6 py-4 md:px-10 lg:px-40 bg-terminal-black/80 backdrop-blur-md sticky top-0 z-50">
-            <div className="flex items-center gap-4 text-primary">
-              <div className="size-6 terminal-text-glow">
-                <span className="material-symbols-outlined text-3xl">terminal</span>
-              </div>
-              <h2 className="text-primary text-lg font-bold leading-tight tracking-tight font-display uppercase italic">JenR8ed_Terminal</h2>
+      <div className="max-w-5xl mx-auto space-y-8 relative z-10">
+        
+        {/* Header Section */}
+        <header className="bg-zinc-900/50 backdrop-blur-md rounded-2xl shadow-xl border border-white/10 p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 relative z-10">
+          <div className="space-y-2">
+            <h1 className="text-3xl font-bold tracking-tight text-zinc-100">{profile.name}</h1>
+            <p className="text-xl font-medium text-rose-500 flex items-center gap-2">
+              <Cpu className="w-5 h-5" /> {profile.title}
+            </p>
+            <div className="flex flex-wrap gap-4 pt-2">
+              <a href={profile.contact.linkedin} className="flex items-center gap-1 text-sm text-zinc-400 hover:text-rose-500 transition"><Linkedin className="w-4 h-4"/> LinkedIn</a>
+              <a href={profile.contact.github} className="flex items-center gap-1 text-sm text-zinc-400 hover:text-white transition"><Github className="w-4 h-4"/> GitHub</a>
+              <a href={`mailto:${profile.contact.email}`} className="flex items-center gap-1 text-sm text-zinc-400 hover:text-rose-500 transition"><Mail className="w-4 h-4"/> Email</a>
             </div>
-            <div className="hidden lg:flex items-center gap-4 font-mono text-[10px] xl:text-xs">
-              <div className="flex items-center gap-1">
-                <span className="text-primary/40">[</span>
-                <span className="text-primary terminal-text-glow uppercase tracking-wider">Uptime: UP 10y 02d 14h</span>
-                <span className="text-primary/40">]</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <span className="text-primary/40">[</span>
-                <span className="text-primary terminal-text-glow font-bold clock-update" id="live-clock">{timeString}</span>
-                <span className="text-primary/40">]</span>
-              </div>
+          </div>
+          <div className="px-4 py-2 bg-rose-500/10 text-rose-400 border border-rose-500/20 rounded-full text-sm font-semibold flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-rose-500 animate-pulse shadow-[0_0_10px_rgba(244,63,94,0.7)]"></span>
+            Open to Contract AI/ML Engineering
+          </div>
+        </header>
+
+        {/* TL;DR Summary */}
+        <section className="bg-gradient-to-r from-rose-900/40 to-zinc-900/60 backdrop-blur-md border border-rose-500/20 text-white rounded-2xl p-8 shadow-2xl relative z-10">
+          <div className="flex items-start gap-4">
+            <Workflow className="w-8 h-8 flex-shrink-0 text-rose-400" />
+            <div>
+              <p className="text-lg leading-relaxed font-medium text-zinc-200">
+                {profile.summary}
+              </p>
             </div>
-            <div className="flex flex-1 justify-end gap-8">
-              <nav className="hidden md:flex items-center gap-9">
-                <a className="text-primary/70 hover:text-primary text-sm font-medium leading-normal transition-colors" href="#whoami">whoami</a>
-                <a className="text-primary/70 hover:text-primary text-sm font-medium leading-normal transition-colors" href="#man">man</a>
-                <a className="text-primary/70 hover:text-primary text-sm font-medium leading-normal transition-colors" href="#projects">projects</a>
-                <a className="text-primary/70 hover:text-primary text-sm font-medium leading-normal transition-colors" href="#experience">experience</a>
-                <a className="text-primary/70 hover:text-primary text-sm font-medium leading-normal transition-colors" href="#certifications">certifications</a>
-                <a className="text-primary/70 hover:text-primary text-sm font-medium leading-normal transition-colors" href="#contact">contact</a>
-              </nav>
-              <button className="flex min-w-[100px] cursor-pointer items-center justify-center overflow-hidden rounded bg-primary text-background-dark text-xs font-black uppercase leading-normal tracking-widest px-4 h-9 hover:bg-white transition-all">
-                <span>EXECUTE</span>
-              </button>
-            </div>
-          </header>
+          </div>
+        </section>
 
-          <main className="px-6 md:px-10 lg:px-40 py-10 flex flex-col gap-12 max-w-[1200px] mx-auto w-full">
-            <div className="clear-wipe-effect flex flex-col gap-12">
+        {/* Tab Navigation */}
+        <div className="flex bg-black/40 backdrop-blur-md p-1 rounded-xl border border-white/5 shadow-inner relative z-10">
+          <button 
+            onClick={() => setActiveTab('agentic')}
+            className={`flex-1 py-3 px-4 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2 ${activeTab === 'agentic' ? 'bg-rose-600 text-white shadow-[0_0_15px_rgba(225,29,72,0.4)]' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
+          >
+            <Zap className="w-4 h-4" /> Agentic AI Prototypes
+          </button>
+          <button 
+            onClick={() => setActiveTab('experience')}
+            className={`flex-1 py-3 px-4 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2 ${activeTab === 'experience' ? 'bg-rose-600 text-white shadow-[0_0_15px_rgba(225,29,72,0.4)]' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
+          >
+            <ShieldCheck className="w-4 h-4" /> SDET & DevOps Foundation
+          </button>
+          <button 
+            onClick={() => setActiveTab('certifications')}
+            className={`flex-1 py-3 px-4 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2 ${activeTab === 'certifications' ? 'bg-rose-600 text-white shadow-[0_0_15px_rgba(225,29,72,0.4)]' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
+          >
+            <Award className="w-4 h-4" /> Certifications
+          </button>
+        </div>
 
-              <section className="flex flex-col gap-6" id="whoami">
-                <div className="flex items-center gap-2">
-                  <span className="text-primary/50">visitor@jenr8ed:~$</span>
-                  <h1 className="text-primary text-2xl md:text-3xl font-bold terminal-text-glow">whoami</h1>
-                </div>
-                <div className="bg-primary/5 border border-primary/20 p-6 md:p-10 rounded-lg relative overflow-hidden">
-                  <div className="absolute top-0 right-0 p-4 opacity-10">
-                    <span className="material-symbols-outlined text-9xl">person_search</span>
-                  </div>
-                  <div className="relative z-10 flex flex-col gap-4">
-                    <h2 className="text-primary text-3xl md:text-5xl font-black leading-tight font-display">{profile.name}</h2>
-                    <p className="text-primary/90 text-lg md:text-xl max-w-2xl leading-relaxed">
-                      {profile.title}. {profile.summary}
-                    </p>
-                    <div className="mt-4 flex gap-4">
-                      <a href="#contact" className="bg-primary text-background-dark px-6 py-3 rounded font-bold uppercase text-sm tracking-widest hover:brightness-110">INITIALIZE_CONTACT</a>
-                      <a href={profile.contact.portfolio} className="border border-primary text-primary px-6 py-3 rounded font-bold uppercase text-sm tracking-widest hover:bg-primary/10 text-center">GET_RESUME.EXE</a>
+        {/* Content Area */}
+        <main className="transition-all duration-300">
+          {activeTab === 'agentic' ? (
+            <div className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {agenticFeatures.map((f, i) => (
+                  <div key={i} className="bg-zinc-900/40 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-lg hover:border-rose-500/50 hover:bg-white/5 transition-all duration-300 group">
+                    <div className="w-10 h-10 bg-rose-500/10 text-rose-400 rounded-lg flex items-center justify-center mb-4 group-hover:bg-rose-600 group-hover:text-white group-hover:shadow-[0_0_15px_rgba(225,29,72,0.6)] transition-all duration-300">
+                      {f.icon}
                     </div>
-                  </div>
-                </div>
-              </section>
-
-              <section className="flex flex-col gap-4" id="man">
-                <div className="flex items-center gap-2">
-                  <span className="text-primary/50">visitor@jenr8ed:~$</span>
-                  <h2 className="text-primary text-xl font-bold terminal-text-glow">man jennifer</h2>
-                </div>
-                <div className="bg-primary/5 border border-primary/20 p-6 md:p-8 rounded font-mono text-xs md:text-sm leading-relaxed overflow-x-auto relative">
-                  <div className="flex justify-between mb-8 text-primary font-bold uppercase tracking-widest opacity-80">
-                    <span>JENNIFER(1)</span>
-                    <span>Manual Programmer's Manual</span>
-                    <span>JENNIFER(1)</span>
-                  </div>
-                  <div className="flex flex-col gap-6">
-                    <div>
-                      <h3 className="text-primary font-black mb-2 terminal-text-glow">NAME</h3>
-                      <p className="pl-8 text-primary/90">{profile.name} - {profile.title}</p>
-                    </div>
-                    <div>
-                      <h3 className="text-primary font-black mb-2 terminal-text-glow">SYNOPSIS</h3>
-                      <p className="pl-8 text-primary/90 font-bold">jennifer <span className="font-normal">[--ai] [--python] [--sdet] [--qa]</span></p>
-                    </div>
-                    <div>
-                      <h3 className="text-primary font-black mb-2 terminal-text-glow">DESCRIPTION</h3>
-                      <p className="pl-8 text-primary/90 text-justify">
-                        {profile.summary}
-                      </p>
-                    </div>
-                    <div>
-                      <h3 className="text-primary font-black mb-2 terminal-text-glow">OPTIONS</h3>
-                      <div className="pl-8 flex flex-col gap-2">
-                        <div className="flex gap-4">
-                          <span className="text-primary font-bold min-w-[100px]">--github</span>
-                          <a href={profile.contact.github} className="text-primary/90 hover:underline">{profile.contact.github}</a>
-                        </div>
-                        <div className="flex gap-4">
-                          <span className="text-primary font-bold min-w-[100px]">--linkedin</span>
-                          <a href={profile.contact.linkedin} className="text-primary/90 hover:underline">{profile.contact.linkedin}</a>
-                        </div>
-                        <div className="flex gap-4">
-                          <span className="text-primary font-bold min-w-[100px]">--email</span>
-                          <a href={`mailto:${profile.contact.email}`} className="text-primary/90 hover:underline">{profile.contact.email}</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="mt-12 text-center text-primary/40 text-[10px]">
-                    JenR8ed OS 1.2.0 - 2026
-                  </div>
-                </div>
-              </section>
-
-              <section className="flex flex-col gap-4" id="projects">
-                <div className="flex items-center gap-2">
-                  <span className="text-primary/50">visitor@jenr8ed:~$</span>
-                  <h2 className="text-primary text-xl font-bold terminal-text-glow">ls -la ./agentic_features</h2>
-                </div>
-                <div className="bg-primary/5 border border-primary/20 p-6 rounded font-mono text-sm md:text-base leading-relaxed overflow-x-auto">
-                  <div className="flex flex-col gap-6">
-                    {agenticFeatures.map((f, i) => (
-                      <div key={i} className="flex flex-col gap-2 border-l-2 border-primary/20 pl-4">
-                        <div className="flex items-center gap-2">
-                          <span className="text-primary font-bold text-lg">{f.title}</span>
-                        </div>
-                        <p className="text-primary/80 text-sm leading-relaxed">{f.description}</p>
-                        <div className="flex gap-2 text-[10px] mt-1">
-                           <span className="text-primary/50">Tech:</span>
-                           {f.tech.map(t => (
-                              <span key={t} className="text-background-dark bg-primary/80 px-1 font-bold">{t}</span>
-                           ))}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </section>
-
-              <section className="flex flex-col gap-4" id="experience">
-                <div className="flex items-center gap-2">
-                  <span className="text-primary/50">visitor@jenr8ed:~$</span>
-                  <h2 className="text-primary text-xl font-bold terminal-text-glow">cat experience.log</h2>
-                </div>
-                <div className="bg-primary/5 border border-primary/20 p-6 rounded font-mono text-sm md:text-base leading-relaxed overflow-x-auto">
-                   <div className="flex flex-col gap-8">
-                    {experience.map((exp, i) => (
-                      <div key={i} className="flex flex-col gap-2">
-                        <div className="flex flex-col md:flex-row md:items-center justify-between gap-1 mb-2 border-b border-primary/20 pb-2">
-                          <span className="text-primary font-bold text-lg terminal-text-glow">{exp.company} // {exp.role}</span>
-                          <span className="text-primary/60 text-xs">[{exp.period}]</span>
-                        </div>
-                        <ul className="flex flex-col gap-2">
-                          {exp.bullets.map((b, j) => (
-                            <li key={j} className="flex items-start gap-2 text-primary/80 text-sm">
-                              <span className="text-primary mt-1">&gt;</span>
-                              <span>{b}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </section>
-
-              <section className="flex flex-col gap-4" id="certifications">
-                <div className="flex items-center gap-2">
-                  <span className="text-primary/50">visitor@jenr8ed:~$</span>
-                  <h2 className="text-primary text-xl font-bold terminal-text-glow">df -h ./certifications</h2>
-                </div>
-                <div className="bg-primary/5 border border-primary/20 p-6 rounded font-mono text-[10px] md:text-sm overflow-x-auto">
-                  <table className="w-full text-left border-collapse min-w-[600px]">
-                    <thead>
-                      <tr className="text-primary font-bold border-b border-primary/20">
-                        <th className="py-2 pr-4">Certification</th>
-                        <th className="py-2 px-4">Issuer</th>
-                        <th className="py-2 px-4">Status</th>
-                      </tr>
-                    </thead>
-                    <tbody className="text-primary/80">
-                      {certifications.map((cert, i) => (
-                        <tr key={i} className="hover:bg-primary/5 transition-colors border-b border-primary/10">
-                          <td className="py-3 pr-4 font-bold">{cert.name}</td>
-                          <td className="py-3 px-4">{cert.issuer}</td>
-                          <td className="py-3 px-4 text-primary">VALIDATED</td>
-                        </tr>
+                    <h3 className="font-bold text-zinc-100 mb-2">{f.title}</h3>
+                    <p className="text-sm text-zinc-400 leading-relaxed mb-4">{f.description}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {f.tech.map(t => (
+                        <span key={t} className="px-2 py-1 bg-black/50 border border-white/5 text-zinc-300 rounded text-[10px] font-bold uppercase tracking-wider">{t}</span>
                       ))}
-                    </tbody>
-                  </table>
-                </div>
-              </section>
-
-              <section className="flex flex-col gap-4" id="contact">
-                <div className="flex items-center gap-2">
-                  <span className="text-primary/50">visitor@jenr8ed:~$</span>
-                  <h2 className="text-primary text-xl font-bold terminal-text-glow">ssh jennifer@contact.me</h2>
-                </div>
-                <div className="flex flex-col gap-6 mt-4 border-l-2 border-primary/20 pl-6">
-                  <div className="flex flex-col gap-2">
-                    <p className="text-primary/90">The authenticity of host contact.me can't be established.</p>
-                    <p className="text-primary/90">ECDSA key fingerprint is SHA256:7u8v9w0x1y2z3a4b5c6d7e8f9g0h1i2j3k4l5m6n7o8.</p>
-                    <div className="flex flex-wrap items-center gap-2">
-                      <label className="whitespace-nowrap">Are you sure you want to continue connecting (yes/no)? [yes]</label>
-                      <input autoFocus className="terminal-input w-24 border-b border-primary/30 bg-transparent text-primary outline-none ring-0" placeholder="yes" type="text" />
                     </div>
                   </div>
-                  <div className="flex flex-col gap-4">
-                    <p className="text-primary/70 italic text-sm">Warning: Permanently added 'contact.me' (ECDSA) to the list of known hosts.</p>
-                    <div className="flex flex-col gap-2">
-                      <label className="text-primary font-bold" htmlFor="message-field">Message:</label>
-                      <textarea className="bg-primary/5 border border-primary/20 rounded p-4 text-primary font-mono focus:ring-1 focus:ring-primary focus:border-primary outline-none resize-none w-full max-w-2xl" id="message-field" placeholder="Type your inquiry here..." rows="4"></textarea>
-                    </div>
+                ))}
+              </div>
+              
+              <div className="bg-black/60 backdrop-blur-xl border border-white/10 text-zinc-300 rounded-2xl p-8 overflow-hidden relative shadow-2xl">
+                <div className="relative z-10">
+                  <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-zinc-100">
+                    <Terminal className="w-5 h-5 text-rose-500 drop-shadow-[0_0_5px_rgba(244,63,94,0.8)]" /> Live Agent Log: ConversationOrchestrator
+                  </h3>
+                  <div className="font-mono text-sm space-y-2 bg-black/80 p-4 rounded-lg border border-white/5 shadow-inner">
+                    <p className="text-zinc-400">[{new Date().toISOString()}] INFO: Initializing ItemValuation agent...</p>
+                    <p className="text-rose-400">DETECTED: Sony WH-1000XM4 (Confidence: 0.94)</p>
+                    <p className="text-rose-400">ANALYZING: 90-day sold pricing data found.</p>
+                    <p className="text-rose-300">AGENTIC QUERY: "Is original packaging included?"</p>
+                    <p className="text-zinc-400">WAITING: User input required to finalize ListingDraft...</p>
+                  </div>
+                </div>
+                <div className="absolute top-0 right-0 p-8 opacity-10">
+                  <Workflow className="w-48 h-48 text-rose-500/20" />
+                </div>
+              </div>
+            </div>
+          ) : activeTab === 'experience' ? (
+            <div className="space-y-6">
+              {experience.map((exp, i) => (
+                <div key={i} className="bg-zinc-900/40 backdrop-blur-md rounded-2xl border border-white/10 p-8 shadow-lg hover:bg-white/5 hover:border-rose-500/30 transition-all duration-300">
+                  <div className="flex flex-col md:flex-row justify-between mb-4 gap-2">
                     <div>
-                      <a href={`mailto:${profile.contact.email}`} className="inline-block bg-primary text-background-dark px-6 py-2 rounded font-bold uppercase text-xs tracking-widest hover:bg-white transition-all">SUBMIT_PAYLOAD</a>
+                      <h3 className="text-xl font-bold text-zinc-100">{exp.role}</h3>
+                      <p className="text-rose-400 font-semibold">{exp.company}</p>
                     </div>
+                    <span className="text-sm font-bold text-zinc-400 bg-black/50 border border-white/5 px-3 py-1 rounded-full h-fit">{exp.period}</span>
                   </div>
+                  <ul className="space-y-3">
+                    {exp.bullets.map((b, j) => (
+                      <li key={j} className="flex items-start gap-3 text-zinc-400 leading-relaxed text-sm">
+                        <CheckCircle className="w-4 h-4 text-rose-500 mt-1 flex-shrink-0 drop-shadow-[0_0_3px_rgba(244,63,94,0.5)]" />
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </section>
 
@@ -319,20 +217,21 @@ const App = () => {
               <span className="text-primary/50">visitor@jenr8ed:~$</span>
               <span className="cursor animate-blink"></span>
             </div>
-          </main>
-
-          <footer className="fixed bottom-0 left-0 w-full bg-primary/10 backdrop-blur-sm border-t border-primary/20 px-4 py-1 flex justify-between text-[10px] text-primary/60 font-mono z-40">
-            <div className="flex gap-4">
-              <span>UTF-8</span>
-              <span>PYTHON 3.11</span>
-            </div>
-            <div className="flex gap-4">
-              <span>JENR8ED_OS v1.2.0</span>
-              <span>STATUS: ENCRYPTED_ACCESS</span>
+          ) : (
+            <div className="bg-zinc-900/40 backdrop-blur-md rounded-2xl border border-white/10 shadow-xl overflow-hidden">
+              <iframe
+                src="/sqatester/certifications.html"
+                title="Certifications"
+                className="w-full"
+                style={{ height: '80vh', border: 'none' }}
+              />
             </div>
           </footer>
 
-        </div>
+        {/* Footer */}
+        <footer className="text-center py-8 text-zinc-600 text-sm border-t border-white/10 relative z-10">
+          <p>2026 Jennifer McKinley. Generated via your preferred agentic assistant.</p>
+        </footer>
       </div>
     </div>
   );
