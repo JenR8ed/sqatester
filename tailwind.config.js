@@ -8,11 +8,11 @@ export default {
   theme: {
     extend: {
       colors: {
-        "primary": "#0df20d",
+        "primary": "#00cc00",
         "background-light": "#f5f8f5",
         "background-dark": "#050a05",
         "terminal-black": "#020402",
-        "terminal-glow": "rgba(13, 242, 13, 0.15)",
+        "terminal-glow": "rgba(0, 204, 0, 0.15)",
       },
       fontFamily: {
         "display": ["Space Grotesk", "sans-serif"],
