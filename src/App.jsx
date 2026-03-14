@@ -1,89 +1,94 @@
-import React, { useState } from 'react';
-import { 
-  Terminal, 
-  Cpu, 
-  Layers, 
-  CheckCircle, 
-  MessageSquare, 
-  ExternalLink, 
-  Github, 
-  Linkedin, 
-  Mail, 
-  Database, 
-  Workflow, 
-  ShieldCheck,
-  Zap,
-  Award
-} from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+
+const profile = Object.freeze({
+  name: "Jennifer McKinley",
+  title: "Multimodal AI Engineer & SDET Architect",
+  summary: "Senior SDET with 10+ years of experience bridging DevOps, QA, and Multimodal AI. Currently architecting AI List Assist, an agentic inventory engine utilizing Gemini 1.5 Pro and Late Fusion architecture to transform unstructured visual data into production-grade e-commerce assets.",
+  contact: Object.freeze({
+    email: "jen.mckinley@gmail.com",
+    linkedin: "https://linkedin.com/in/sqatester",
+    portfolio: "https://jenr8ed.github.io/sqatester",
+    github: "https://github.com/jenr8ed"
+  })
+});
+
+const agenticFeatures = Object.freeze([
+  Object.freeze({
+    title: "Conversational Orchestration",
+    description: "Implemented a state-machine based 'Agent' that identifies missing metadata and autonomously prompts users to resolve ambiguities.",
+    tech: Object.freeze(["Python", "FastAPI", "Gemini 1.5"])
+  }),
+  Object.freeze({
+    title: "Late Fusion Vision Pipeline",
+    description: "Architected a multi-stage detection system combining Google Cloud Vision OCR with Gemini vision encoders for high-fidelity attribute extraction.",
+    tech: Object.freeze(["Google Cloud Vision", "Multimodal AI"])
+  }),
+  Object.freeze({
+    title: "Production-Grade MLOps",
+    description: "Deployed inference containers with 99.9% uptime using Docker and automated CI/CD for model deployment and validation.",
+    tech: Object.freeze(["Docker", "Jenkins", "Pytest"])
+  })
+]);
+
+const experience = Object.freeze([
+  Object.freeze({
+    company: "AI List Assist (Personal Project)",
+    role: "Lead AI Engineer & Architect",
+    period: "Nov 2025 - Present",
+    bullets: Object.freeze([
+      "Built a multimodal inventory intelligence engine using Gemini 1.5 Pro for automated marketplace listing generation.",
+      "Developed a Decision Gate logic system to autonomously determine item profitability and listing recommendations.",
+      "Integrated eBay Sell APIs (Inventory & Offer) for one-click agentic publishing."
+    ])
+  }),
+  Object.freeze({
+    company: "Certent Inc.",
+    role: "Lead QA Automation Engineer",
+    period: "Sep 2013 - Sep 2016",
+    bullets: Object.freeze([
+      "Architected scalable Selenium-based automation frameworks using JavaScript, reducing regression cycles by 60%.",
+      "Led a horizontal team of 6 engineers, establishing quality-driven roadmaps for enterprise financial SaaS.",
+      "Implemented TeamCity CI/CD pipelines for 'test-early' validation of 12+ monthly releases."
+    ])
+  }),
+  Object.freeze({
+    company: "Intel Corp",
+    role: "Tester I - Product Validation",
+    period: "Nov 2021 - Feb 2022",
+    bullets: Object.freeze([
+      "Executed WHQL/HLK hardware validation protocols for graphics drivers with 100% Microsoft compliance.",
+      "Automated cross-platform test execution across CPU/GPU/NPU architectures using Python scripts.",
+      "Identified and triaged over 100 critical firmware integration bugs before production release."
+    ])
+  })
+]);
+
+const certifications = Object.freeze([
+  Object.freeze({
+    name: "Google IT Automation with Python Professional Certificate",
+    issuer: "Google / Coursera"
+  }),
+  Object.freeze({
+    name: "Programming in HTML5 with JavaScript and CSS3",
+    issuer: "Microsoft Certified Professional"
+  })
+]);
 
 const App = () => {
-  const [activeTab, setActiveTab] = useState('agentic');
+  const [timeString, setTimeString] = useState('');
 
-  const profile = {
-    name: "Jennifer McKinley",
-    title: "Multimodal AI Engineer & SDET Architect",
-    summary: "Senior SDET with 10+ years of experience bridging DevOps, QA, and Multimodal AI. Currently architecting AI List Assist, an agentic inventory engine utilizing Gemini 1.5 Pro and Late Fusion architecture to transform unstructured visual data into production-grade e-commerce assets.",
-    contact: {
-      email: "jen.mckinley@gmail.com",
-      linkedin: "https://linkedin.com/in/sqatester",
-      portfolio: "https://jenr8ed.github.io/sqatester",
-      github: "https://github.com/jenr8ed"
-    }
-  };
-
-  const agenticFeatures = [
-    {
-      title: "Conversational Orchestration",
-      description: "Implemented a state-machine based 'Agent' that identifies missing metadata and autonomously prompts users to resolve ambiguities.",
-      tech: ["Python", "FastAPI", "Gemini 1.5"],
-      icon: <MessageSquare className="w-5 h-5" />
-    },
-    {
-      title: "Late Fusion Vision Pipeline",
-      description: "Architected a multi-stage detection system combining Google Cloud Vision OCR with Gemini vision encoders for high-fidelity attribute extraction.",
-      tech: ["Google Cloud Vision", "Multimodal AI"],
-      icon: <Layers className="w-5 h-5" />
-    },
-    {
-      title: "Production-Grade MLOps",
-      description: "Deployed inference containers with 99.9% uptime using Docker and automated CI/CD for model deployment and validation.",
-      tech: ["Docker", "Jenkins", "Pytest"],
-      icon: <Cpu className="w-5 h-5" />
-    }
-  ];
-
-  const experience = [
-    {
-      company: "AI List Assist (Personal Project)",
-      role: "Lead AI Engineer & Architect",
-      period: "Nov 2025 - Present",
-      bullets: [
-        "Built a multimodal inventory intelligence engine using Gemini 1.5 Pro for automated marketplace listing generation.",
-        "Developed a Decision Gate logic system to autonomously determine item profitability and listing recommendations.",
-        "Integrated eBay Sell APIs (Inventory & Offer) for one-click agentic publishing."
-      ]
-    },
-    {
-      company: "Certent Inc.",
-      role: "Lead QA Automation Engineer",
-      period: "Sep 2013 - Sep 2016",
-      bullets: [
-        "Architected scalable Selenium-based automation frameworks using JavaScript, reducing regression cycles by 60%.",
-        "Led a horizontal team of 6 engineers, establishing quality-driven roadmaps for enterprise financial SaaS.",
-        "Implemented TeamCity CI/CD pipelines for 'test-early' validation of 12+ monthly releases."
-      ]
-    },
-    {
-      company: "Intel Corp",
-      role: "Tester I - Product Validation",
-      period: "Nov 2021 - Feb 2022",
-      bullets: [
-        "Executed WHQL/HLK hardware validation protocols for graphics drivers with 100% Microsoft compliance.",
-        "Automated cross-platform test execution across CPU/GPU/NPU architectures using Python scripts.",
-        "Identified and triaged over 100 critical firmware integration bugs before production release."
-      ]
-    }
-  ];
+  useEffect(() => {
+    const updateClock = () => {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      setTimeString(`${hours}:${minutes}:${seconds}`);
+    };
+    const intervalId = setInterval(updateClock, 1000);
+    updateClock();
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans p-4 md:p-8 relative overflow-hidden">
@@ -205,7 +210,12 @@ const App = () => {
                     ))}
                   </ul>
                 </div>
-              ))}
+              </section>
+
+            </div>
+            <div className="flex items-center gap-2 pt-10 pb-20 border-t border-primary/10">
+              <span className="text-primary/50">visitor@jenr8ed:~$</span>
+              <span className="cursor animate-blink"></span>
             </div>
           ) : (
             <div className="bg-zinc-900/40 backdrop-blur-md rounded-2xl border border-white/10 shadow-xl overflow-hidden">
@@ -216,8 +226,7 @@ const App = () => {
                 style={{ height: '80vh', border: 'none' }}
               />
             </div>
-          )}
-        </main>
+          </footer>
 
         {/* Footer */}
         <footer className="text-center py-8 text-zinc-600 text-sm border-t border-white/10 relative z-10">
