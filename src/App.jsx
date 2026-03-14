@@ -13,7 +13,8 @@ import {
   Zap, 
   Award,
   Download,
-  FileText
+  FileText,
+  ExternalLink
 } from 'lucide-react';
 
 const profile = Object.freeze({
@@ -149,20 +150,32 @@ const App = () => {
         </section>
 
         {/* Tab Navigation */}
-        <nav className=\"bg-white p-2 rounded-2xl shadow-sm border border-slate-100 flex gap-1\">
+        <nav role="tablist" className="bg-white p-2 rounded-2xl shadow-sm border border-slate-100 flex gap-1">
           <button 
+            id="tab-agentic"
+            role="tab"
+            aria-selected={activeTab === 'agentic'}
+            aria-controls="panel-agentic"
             onClick={() => setActiveTab('agentic')}
             className={`flex-1 py-3 px-4 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2 ${activeTab === 'agentic' ? 'bg-blue-600 text-white shadow-md' : 'text-slate-500 hover:bg-slate-50'}`}
           >
             <Zap size={18} /> Agentic AI Prototypes
           </button>
           <button 
+            id="tab-experience"
+            role="tab"
+            aria-selected={activeTab === 'experience'}
+            aria-controls="panel-experience"
             onClick={() => setActiveTab('experience')}
             className={`flex-1 py-3 px-4 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2 ${activeTab === 'experience' ? 'bg-blue-600 text-white shadow-md' : 'text-slate-500 hover:bg-slate-50'}`}
           >
             <ShieldCheck size={18} /> SDET & DevOps Foundation
           </button>
           <button 
+            id="tab-certifications"
+            role="tab"
+            aria-selected={activeTab === 'certifications'}
+            aria-controls="panel-certifications"
             onClick={() => setActiveTab('certifications')}
             className={`flex-1 py-3 px-4 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2 ${activeTab === 'certifications' ? 'bg-blue-600 text-white shadow-md' : 'text-slate-500 hover:bg-slate-50'}`}
           >
@@ -173,7 +186,7 @@ const App = () => {
         {/* Content Area */}
         <main className=\"animate-in fade-in duration-500\">
           {activeTab === 'agentic' ? (
-            <div className=\"space-y-6\">
+            <div id="panel-agentic" role="tabpanel" aria-labelledby="tab-agentic" className="space-y-6">
               <div className=\"grid md:grid-cols-2 gap-6\">
                 {agenticFeatures.map((f, i) => (
                   <div key={i} className=\"bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow group\">
@@ -213,7 +226,7 @@ const App = () => {
               </div>
             </div>
           ) : activeTab === 'experience' ? (
-            <div className=\"space-y-6\">
+            <div id="panel-experience" role="tabpanel" aria-labelledby="tab-experience" className="space-y-6">
               {experience.map((exp, i) => (
                 <div key={i} className=\"bg-white p-8 rounded-2xl border border-slate-100 shadow-sm\">
                   <div className=\"flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-2\">
@@ -237,7 +250,7 @@ const App = () => {
               ))}
             </div>
           ) : (
-            <div className=\"bg-white p-8 rounded-2xl border border-slate-100 shadow-sm grid md:grid-cols-2 gap-6\">
+            <div id="panel-certifications" role="tabpanel" aria-labelledby="tab-certifications" className="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm grid md:grid-cols-2 gap-6">
               {certifications.map((cert, i) => (
                 <div key={i} className=\"flex items-center gap-4 p-4 bg-slate-50 rounded-xl border border-slate-100\">
                   <div className=\"bg-white p-3 rounded-lg shadow-sm\">
