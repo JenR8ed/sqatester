@@ -80,7 +80,6 @@ async def main():
         sys.exit(1)
 
     print("Dev server started. Waiting for it to be ready...")
-    time.sleep(5)
 
     success = False
     try:
