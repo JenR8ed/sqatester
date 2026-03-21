@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Cpu, Linkedin, Github, Mail, Workflow, Zap, ShieldCheck, Award, Terminal, CheckCircle } from 'lucide-react';
 
 const profile = Object.freeze({
   name: "Jennifer McKinley",
@@ -76,6 +77,7 @@ const certifications = Object.freeze([
 
 const App = () => {
   const [timeString, setTimeString] = useState('');
+  const [activeTab, setActiveTab] = useState('agentic');
 
   useEffect(() => {
     const updateClock = () => {
@@ -210,8 +212,7 @@ const App = () => {
                     ))}
                   </ul>
                 </div>
-              </section>
-
+              ))}
             </div>
             <div className="flex items-center gap-2 pt-10 pb-20 border-t border-primary/10">
               <span className="text-primary/50">visitor@jenr8ed:~$</span>
@@ -226,7 +227,8 @@ const App = () => {
                 style={{ height: '80vh', border: 'none' }}
               />
             </div>
-          </footer>
+          )}
+        </main>
 
         {/* Footer */}
         <footer className="text-center py-8 text-zinc-600 text-sm border-t border-white/10 relative z-10">
