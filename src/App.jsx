@@ -193,6 +193,7 @@ const App = () => {
               </div>
             </div>
           ) : activeTab === 'experience' ? (
+          <>
             <div className="space-y-6">
               {experience.map((exp, i) => (
                 <div key={i} className="bg-zinc-900/40 backdrop-blur-md rounded-2xl border border-white/10 p-8 shadow-lg hover:bg-white/5 hover:border-rose-500/30 transition-all duration-300">
@@ -218,6 +219,7 @@ const App = () => {
               <span className="text-primary/50">visitor@jenr8ed:~$</span>
               <span className="cursor animate-blink"></span>
             </div>
+                      </>
           ) : (
             <div className="bg-zinc-900/40 backdrop-blur-md rounded-2xl border border-white/10 shadow-xl overflow-hidden">
               <iframe
