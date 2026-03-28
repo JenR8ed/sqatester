@@ -76,6 +76,13 @@ const certifications = Object.freeze([
 ]);
 
 const App = () => {
+  const getTabClass = (tabName) => {
+    const baseClasses = "flex-1 py-3 px-4 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2";
+    const activeClasses = "bg-rose-600 text-white shadow-[0_0_15px_rgba(225,29,72,0.4)]";
+    const inactiveClasses = "text-zinc-400 hover:text-zinc-200 hover:bg-white/5";
+    return `${baseClasses} ${activeTab === tabName ? activeClasses : inactiveClasses}`;
+  };
+
   const [timeString, setTimeString] = useState('');
   const [activeTab, setActiveTab] = useState('agentic');
 
@@ -135,19 +142,19 @@ const App = () => {
         <div className="flex bg-black/40 backdrop-blur-md p-1 rounded-xl border border-white/5 shadow-inner relative z-10">
           <button 
             onClick={() => setActiveTab('agentic')}
-            className={`flex-1 py-3 px-4 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2 ${activeTab === 'agentic' ? 'bg-rose-600 text-white shadow-[0_0_15px_rgba(225,29,72,0.4)]' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
+            className={getTabClass('agentic')}
           >
             <Zap className="w-4 h-4" /> Agentic AI Prototypes
           </button>
           <button 
             onClick={() => setActiveTab('experience')}
-            className={`flex-1 py-3 px-4 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2 ${activeTab === 'experience' ? 'bg-rose-600 text-white shadow-[0_0_15px_rgba(225,29,72,0.4)]' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
+            className={getTabClass('experience')}
           >
             <ShieldCheck className="w-4 h-4" /> SDET & DevOps Foundation
           </button>
           <button 
             onClick={() => setActiveTab('certifications')}
-            className={`flex-1 py-3 px-4 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2 ${activeTab === 'certifications' ? 'bg-rose-600 text-white shadow-[0_0_15px_rgba(225,29,72,0.4)]' : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/5'}`}
+            className={getTabClass('certifications')}
           >
             <Award className="w-4 h-4" /> Certifications
           </button>
