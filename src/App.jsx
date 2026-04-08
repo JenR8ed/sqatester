@@ -76,21 +76,7 @@ const certifications = Object.freeze([
 ]);
 
 const App = () => {
-  const [timeString, setTimeString] = useState('');
   const [activeTab, setActiveTab] = useState('agentic');
-
-  useEffect(() => {
-    const updateClock = () => {
-      const now = new Date();
-      const hours = String(now.getHours()).padStart(2, '0');
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const seconds = String(now.getSeconds()).padStart(2, '0');
-      setTimeString(`${hours}:${minutes}:${seconds}`);
-    };
-    const intervalId = setInterval(updateClock, 1000);
-    updateClock();
-    return () => clearInterval(intervalId);
-  }, []);
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans p-4 md:p-8 relative overflow-hidden">

@@ -86,22 +86,47 @@ async def main():
                 await browser.close()
                 return False
 
-            # 1. Verify Initial Render
+            # 1. Verify Initial Render & Profile Summary
             print("Checking if main component rendered...")
             await page.wait_for_selector('text="Jennifer McKinley"', timeout=10000)
-            print("SUCCESS: Component mounted and 'Jennifer McKinley' text found.")
+            await page.wait_for_selector('p:has-text("Senior SDET with 10+ years")', timeout=5000)
+            print("SUCCESS: Component mounted and profile info found.")
 
-            # 2. Verify Default Tab (Agentic AI Prototypes)
-            print("Verifying default tab content...")
+            # 1b. Verify External Links
+            print("Verifying external links...")
+            linkedin_link = await page.get_attribute('a:has-text("LinkedIn")', 'href')
+            assert linkedin_link == "https://linkedin.com/in/jenr8ed-ai", f"Unexpected LinkedIn link: {linkedin_link}"
+            github_link = await page.get_attribute('a:has-text("GitHub")', 'href')
+            assert github_link == "https://github.com/jenr8ed", f"Unexpected GitHub link: {github_link}"
+            email_link = await page.get_attribute('a:has-text("Email")', 'href')
+            assert email_link == "mailto:jen.mckinley@gmail.com", f"Unexpected Email link: {email_link}"
+            print("SUCCESS: External links verified.")
+
+            # 2. Verify Default Tab (Agentic AI Prototypes) & active state
+            print("Verifying default tab content and active state...")
             await page.wait_for_selector('text="Agentic AI Prototypes"', timeout=5000)
             await page.wait_for_selector('text="Conversational Orchestration"', timeout=5000)
-            print("SUCCESS: Default tab 'Agentic AI Prototypes' content verified.")
 
-            # 3. Switch to 'SDET & DevOps Foundation' Tab
+            # Check if default tab has active styling
+            agentic_tab = page.locator('button:has-text("Agentic AI Prototypes")')
+            agentic_classes = await agentic_tab.get_attribute("class")
+            assert "bg-rose-600" in agentic_classes, "Agentic tab should be active by default"
+
+            print("SUCCESS: Default tab 'Agentic AI Prototypes' content and active state verified.")
+
+            # 3. Switch to 'SDET & DevOps Foundation' Tab & verify active state update
             print("Switching to 'SDET & DevOps Foundation' tab...")
-            await page.click('button:has-text("SDET & DevOps Foundation")')
+            sdet_tab = page.locator('button:has-text("SDET & DevOps Foundation")')
+            await sdet_tab.click()
             await page.wait_for_selector('text="Lead AI Engineer & Architect"', timeout=5000)
-            print("SUCCESS: 'SDET & DevOps Foundation' tab content verified.")
+
+            # Check if classes updated properly
+            sdet_classes = await sdet_tab.get_attribute("class")
+            agentic_classes = await agentic_tab.get_attribute("class")
+            assert "bg-rose-600" in sdet_classes, "SDET tab should be active after click"
+            assert "bg-rose-600" not in agentic_classes, "Agentic tab should not be active"
+
+            print("SUCCESS: 'SDET & DevOps Foundation' tab content and active state verified.")
 
             # 4. Switch to 'Certifications' Tab
             print("Switching to 'Certifications' tab...")
