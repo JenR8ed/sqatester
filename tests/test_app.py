@@ -53,9 +53,6 @@ async def main():
         time.sleep(1)
         if server_process.poll() is not None:
              print("Server process exited prematurely. Is node_modules installed?")
-             # stdout, stderr = server_process.communicate()
-             # print(f"Stdout: {stdout}")
-             # print(f"Stderr: {stderr}")
              # We continue to try the test anyway in case a server is already running
         else:
             port_ready = wait_for_port(5173, timeout=30)
