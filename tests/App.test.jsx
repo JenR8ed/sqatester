@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
 import App from '../src/App';
@@ -32,5 +32,43 @@ describe('App Component Clock Interval', () => {
 
     // Check that clearInterval was called with the correct intervalId
     expect(clearIntervalSpy).toHaveBeenCalledWith(intervalId);
+  });
+});
+
+describe('App Component Tab Switching', () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+    vi.restoreAllMocks();
+  });
+
+  it('should switch tabs when clicked', () => {
+    const { getByText, queryByText, getByTitle } = render(<App />);
+
+    // 1. Initial State: Agentic AI Prototypes
+    expect(getByText('Live Agent Log: ConversationOrchestrator')).toBeInTheDocument();
+    expect(queryByText('Lead QA Automation Engineer')).not.toBeInTheDocument();
+    expect(document.querySelector('iframe[title="Certifications"]')).toBeNull();
+
+    // 2. Click on "SDET & DevOps Foundation" tab
+    const experienceTab = getByText('SDET & DevOps Foundation');
+    fireEvent.click(experienceTab);
+
+    // Verify Experience content is shown
+    expect(getByText('Lead QA Automation Engineer')).toBeInTheDocument();
+    // Verify Agentic content is hidden
+    expect(queryByText('Live Agent Log: ConversationOrchestrator')).not.toBeInTheDocument();
+
+    // 3. Click on "Certifications" tab
+    const certificationsTab = getByText('Certifications');
+    fireEvent.click(certificationsTab);
+
+    // Verify Certifications content is shown
+    expect(getByTitle('Certifications')).toBeInTheDocument();
+    // Verify Experience content is hidden
+    expect(queryByText('Lead QA Automation Engineer')).not.toBeInTheDocument();
   });
 });
