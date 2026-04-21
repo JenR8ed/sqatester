@@ -1,21 +1,7 @@
 import asyncio
 from playwright.async_api import async_playwright
-# import subprocess
-# import time
-# import socket
 import sys
 import os
-
-# def wait_for_port(port, host='localhost', timeout=30.0):
-#     start_time = time.time()
-#     while True:
-#         try:
-#             with socket.create_connection((host, port), timeout=1.0):
-#                 return True
-#         except OSError:
-#             time.sleep(0.5)
-#             if time.time() - start_time >= timeout:
-#                 return False
 
 async def main():
     # In this environment, we may not be able to start the dev server via subprocess
