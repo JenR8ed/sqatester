@@ -1,15 +1,22 @@
-# Jennifer McKinley - Portfolio
+# sqatester: SDET portfolio project
 
-Multimodal AI Engineer & SDET Architect
+React/Vite front-end project for Jennifer McKinley's SDET and quality-engineering portfolio.
 
-## 🚀 Tech Stack
+The primary portfolio is at [jenr8edai.com](https://jenr8edai.com). This repository holds the source and tests for an earlier React/Vite portfolio site.
+
+## Status
+
+**Hosted demo currently unavailable.** The GitHub Pages address previously linked from this README (`jenr8ed.github.io/sqatester`) returned a 404 when last checked. The cause has not been determined. This repository is source code and tests only.
+
+## Tech stack
 
 - React 18
 - Vite
 - Tailwind CSS
-- Lucide React Icons
+- Lucide React icons
+- Vitest (test runner)
 
-## 🛠️ Development
+## Development
 
 ```bash
 # Install dependencies
@@ -25,12 +32,20 @@ npm run build
 npm run preview
 ```
 
-## 📦 Deployment
+## Testing
 
-This site is automatically deployed to GitHub Pages via GitHub Actions on every push to the `main` branch.
+The repository includes a `tests/` directory containing `App.test.jsx` (Vitest) and `test_app.py`, and a `vitest.config.js` configuration.
 
-**Live Site**: [https://jenr8ed.github.io/sqatester](https://jenr8ed.github.io/sqatester)
+```bash
+npm test
+```
 
-## 📄 License
+`npm test` runs `vitest run`. Test results and coverage have not been recorded for this README, and `tests/test_app.py` is not run by this command.
+
+## Deployment
+
+GitHub Pages is enabled for this repository, but the current deployment is not working (see Status). No deployment is documented as verified.
+
+## License
 
 Copyright © 2026 Jennifer McKinley. All rights reserved.
