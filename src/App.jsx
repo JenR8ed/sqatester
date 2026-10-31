@@ -233,7 +233,7 @@ const App = () => {
                 src="/sqatester/certifications.html"
                 title="Certifications"
                 className="w-full"
-                sandbox="allow-scripts"
+                sandbox=""
                 style={{ height: '80vh', border: 'none' }}
               />
             </div>
